@@ -7,6 +7,7 @@
       class="px-4 py-6 sm:px-8 md:px-16 lg:px-32 w-full self-center max-w-[1156px] gap-y-8"
     >
       <NuxtPage />
+      <ChatBot />
     </main>
     <footer class="w-100 bg-purple p-4 mt-auto">
       <AppFooter />

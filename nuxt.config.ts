@@ -1,4 +1,9 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
@@ -7,7 +12,6 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-
   postcss: {
     plugins: {
       tailwindcss: {},
