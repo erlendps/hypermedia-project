@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@nuxtjs/supabase": "^1.2.1",
+    "dotenv": "^16.4.5",
+    "node-fetch": "^3.3.2",
     "nuxt": "^3.11.2",
+    "openai": "^4.47.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
