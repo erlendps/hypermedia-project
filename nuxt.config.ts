@@ -9,8 +9,13 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@nuxtjs/supabase"],
+  modules: ["@nuxtjs/supabase", "nuxt-primevue"],
   supabase: {
     redirect: false,
+  },
+  primevue: {
+    options: {
+      unstyled: true,
+    },
   },
 });
