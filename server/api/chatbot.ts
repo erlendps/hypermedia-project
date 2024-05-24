@@ -1,8 +1,7 @@
-import OpenAI from 'openai';
-import { defineEventHandler, readBody } from 'h3';
-import { promises as fs } from 'fs';
-import path from 'path';
-
+import OpenAI from "openai";
+import { defineEventHandler, readBody } from "h3";
+import { promises as fs } from "fs";
+import path from "path";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -12,21 +11,24 @@ export default defineEventHandler(async (event) => {
     apiKey: process.env.OPENAI_API_KEY,
   });
 
-  const filePath = path.join(process.cwd(), 'assets', 'initialPrompt.txt')
-  const initialPrompt = await fs.readFile(filePath, 'utf-8');
-  const all_messages = [{ role: 'system', content: initialPrompt }, ...messages];
+  const filePath = path.join(process.cwd(), "assets", "initialPrompt.txt");
+  const initialPrompt = await fs.readFile(filePath, "utf-8");
+  const all_messages = [
+    { role: "system", content: initialPrompt },
+    ...messages,
+  ];
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo-16k',
+      model: "gpt-3.5-turbo-16k",
       messages: all_messages,
     });
 
-    console.log('API Response:', completion);
+    //console.log('API Response:', completion);
     return completion;
   } catch (error) {
-    console.error('Error from OpenAI API:', error);
+    console.error("Error from OpenAI API:", error);
     event.node.res.statusCode = 500;
-    return { error: 'Failed to fetch response from ChatGPT' };
+    return { error: "Failed to fetch response from ChatGPT" };
   }
 });
