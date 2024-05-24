@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import notFound from "~/assets/images/not_found.svg";
 /**
  * Component for a preview. The component user is required to specify the width.
  * It is meant as a preview for person, service or project
@@ -10,7 +11,7 @@
  * @prop to {String} - link to where this preview points.
  * @prop width {String} - tailwindcss class of width
  */
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     required: true,
@@ -42,11 +43,11 @@ const props = defineProps({
       class="flex flex-col items-center text-purple font-bold hover:text-purple-900 group"
     >
       <img
-        v-if="src"
         :src
         :alt
         height="200"
-        class="h-[200px] w-full border-2 border-purple group-hover:border-purple-900 rounded-t-lg"
+        class="h-[200px] w-full border-2 border-purple group-hover:border-purple-900 rounded-t-lg object-cover"
+        @error="($event.target as HTMLImageElement).src = notFound"
       />
       <span>{{ name }}</span>
       <span v-if="extraText">{{ extraText }}</span>

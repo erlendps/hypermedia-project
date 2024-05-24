@@ -5,7 +5,7 @@
  * @prop thin=false {Boolean} - specifies whether the hr should be thin.
  * @prop color="pink" {String} - Selects the color of the divider.
  */
-const props = defineProps({
+defineProps({
   thin: {
     type: Boolean,
     default: false,
