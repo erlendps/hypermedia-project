@@ -18,4 +18,15 @@ export default defineNuxtConfig({
       unstyled: true,
     },
   },
+  app: {
+    head: {
+      link: [
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/favicon.png",
+        },
+      ],
+    },
+  },
 });

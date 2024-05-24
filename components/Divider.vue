@@ -26,6 +26,6 @@ const props = defineProps({
       color === 'pink' ? 'border-pink' : 'border-purple',
       thin ? 'border' : 'border-2',
     ]"
-    class="w-[230px] rounded-lg"
+    class="w-[230px] rounded-lg my-6"
   />
 </template>
