@@ -12,9 +12,9 @@ defineProps({
   },
   color: {
     type: String,
-    default: "pink",
+    default: 'pink',
     validator(value: string, _) {
-      return ["pink", "purple"].includes(value);
+      return ['pink', 'purple'].includes(value);
     },
   },
 });

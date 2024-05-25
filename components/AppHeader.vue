@@ -4,43 +4,17 @@
       <div class="text-3xl">
         <NuxtLink to="/">Forties Mulier</NuxtLink>
       </div>
-      <div
-        class="flex space-x-10 md:flex-row flex-col text-xl md:space-y-0 space-y-2 text-right"
-      >
-        <div v-for="link in links" :key="link.path" class="relative group">
-          <div
-            class="group relative flex-1 text-left"
-            @mouseover="link.showSubmenu = true"
-            @mouseleave="link.showSubmenu = false"
-          >
-            <NuxtLink
-              :active-class="'underline underline-offset-8 decoration-2'"
-              :to="link.path"
-            >
-              {{ link.name }}
-            </NuxtLink>
-            <div
-              v-if="link.submenu && link.showSubmenu"
-              class="absolute left-0 mt-2 w-48 bg-purple text-white shadow-lg rounded-lg"
-            >
-              <NuxtLink
-                v-for="sublink in link.submenu"
-                :key="sublink.path"
-                :to="sublink.path"
-                class="block px-4 py-2 hover:bg-purple-dark"
-              >
-                {{ sublink.name }}
-              </NuxtLink>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <PcMenu :links="links" class="hidden md:block" />
+      <MobileMenu :links="links" class="md:hidden" />
     </div>
   </nav>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import PcMenu from '~/components/menus/PcMenu.vue';
+import MobileMenu from '~/components/menus/MobileMenu.vue';
 
 const links = ref([
   {
