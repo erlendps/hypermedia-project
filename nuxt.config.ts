@@ -20,6 +20,8 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: "Forties Mulier",
+      charset: "utf-8",
       link: [
         {
           rel: "icon",
