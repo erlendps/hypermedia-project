@@ -4,6 +4,10 @@ type ShortService = {
   slug: string;
 };
 
+type ShortProject = ShortService & {
+  timeline: string;
+};
+
 type ShortPerson = {
   firstName: string;
   lastName: string;
@@ -33,4 +37,4 @@ type MenuLinks = Array<{
   showSubmenu?: boolean;
 }>;
 
-export type { ShortService, Service, MenuLinks, ShortPerson };
+export type { ShortService, ShortProject, Service, MenuLinks, ShortPerson };
