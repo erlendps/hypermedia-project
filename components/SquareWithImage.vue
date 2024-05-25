@@ -11,12 +11,14 @@ import notFound from "~/assets/images/not_found.svg";
  * @prop width=w-[150px] {String} - Width formatted as a tailwind class
  * @prop height=h-[150px] {String} - Height formatted as a tailwind class
  */
-defineProps({
+const props = defineProps({
   src: {
     type: String,
+    required: true,
   },
   alt: {
     type: String,
+    required: true,
   },
   circular: {
     type: Boolean,
@@ -31,18 +33,21 @@ defineProps({
     default: "h-[150px]",
   },
 });
+
+const rounding = computed(() => {
+  return props.circular ? "rounded-full" : "rounded-lg";
+});
 </script>
 
 <template>
   <div :class="[width, height]">
-    <img
+    <LoadingImage
       :src
       :alt
-      :class="circular ? 'rounded-full' : 'rounded-lg'"
-      class="w-full h-full border-2 border-purple object-cover"
+      :common-class="`w-full h-full border-2 border-purple ${rounding}`"
+      :class-img="`object-cover`"
       height="150"
       width="150"
-      @error="($event.target as HTMLImageElement).src = notFound"
     />
   </div>
 </template>
