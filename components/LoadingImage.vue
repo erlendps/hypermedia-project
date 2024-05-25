@@ -25,6 +25,13 @@ defineProps({
   classImg: {
     type: String,
   },
+  svgSize: {
+    type: String,
+    default: "lg",
+    validator(value: string, _) {
+      return ["sm", "lg"].includes(value);
+    },
+  },
 });
 
 const isLoaded = ref(false);
@@ -41,7 +48,8 @@ const handleLoaded = () => {
     class="flex items-center justify-center"
   >
     <svg
-      class="w-12 h-12 text-purple-300 animate-spin text-center"
+      :class="svgSize === 'lg' ? 'w-12 h-12' : 'w-6 h-6'"
+      class="text-purple-300 animate-spin text-center"
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
