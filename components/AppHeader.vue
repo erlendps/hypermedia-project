@@ -22,7 +22,7 @@
               </NuxtLink>
               <div
                 v-if="link.submenu && link.showSubmenu"
-                class="left-0 mt-2 w-32 bg-purple text-white shadow-lg rounded-lg"
+                class="left-0 mt-2 w-40 bg-purple text-white shadow-lg rounded-b-lg border-t-4"
               >
                 <NuxtLink
                   v-for="sublink in link.submenu"
