@@ -12,4 +12,11 @@ type Service = ShortService & {
   personId: string;
 };
 
-export type { ShortService, Service };
+type MenuLinks = Array<{
+  path: string;
+  name: string;
+  submenu?: Array<{ path: string; name: string }>;
+  showSubmenu?: boolean;
+}>;
+
+export type { ShortService, Service, MenuLinks };
