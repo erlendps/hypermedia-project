@@ -15,13 +15,13 @@ import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
     </div>
     <Divider />
     <div class="flex flex-col lg:flex-row gap-16 items-center">
-      <p class="w-full sm:w-1/2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pollicetur
-        certe. Hic nihil fuit, quod quaereremus. Bork Eodem modo is enim tibi
-        nemo dabit, quod, expetendum sit, id esse laudabile. Paupertas si malum
-        est, mendicus beatus esse nemo potest, quamvis sit sapiens. Duo Reges:
-        constructio interrete. Hoc est non modo cor non habere, sed ne palatum
-        quidem. Vitiosum est enim in dividendo partem in genere numerare.
+      <p class="w-full sm:w-1/2 text-left">
+        Our dedicated team is here to provide immediate support and assistance
+        to women in crisis. Whether you need legal advice, emotional support, or
+        help navigating resources, we are just a phone call away. Our hotline
+        operates around the clock, ensuring that you have access to the help you
+        need, whenever you need it. Don't hesitate to reach out; your safety and
+        well-being are our top priorities.
       </p>
       <img
         src="/assets/images/service2.jpg"
@@ -40,7 +40,11 @@ import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
         <p class="w-72">Mon-Fri 9:00 - 18:00</p>
         <p class="w-72">Sat-Sun 11:00 - 18:00</p>
       </div>
-      <MapIcon class="w-64" />
+      <img
+        src="/assets/images/map.png"
+        alt="A map showing the location of the center"
+        class="h-64 border-2 border-purple rounded-lg"
+      />
     </div>
     <Divider />
     <h2 class="font-bold text-md sm:text-xl text-purple mb-4">
