@@ -11,20 +11,6 @@ export default defineEventHandler(async (event) => {
     console.error(error);
     return null;
   }
-  /* Should we do this?
-  let dataWithTimeline = data.map((project) => {
-    let firstDate = project.TimelineEvent.reduce((acc, curr) => {
-      if (acc.date < curr.date) return acc;
-      return curr;
-    });
-    let lastDate = project.TimelineEvent.reduce((acc, curr) => {
-      if (acc.date > curr.date) return acc;
-      return curr;
-    });
-
-    let timeline = `${firstDate.date} - ${lastDate.date}`;
-    return { ...project, timeline };
-  });*/
 
   return data;
 });

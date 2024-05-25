@@ -16,20 +16,6 @@ type ShortPerson = {
   slug: string;
 };
 
-type Person = ShortPerson & {
-  education: string;
-  pastExperience: string;
-  expertise: string;
-};
-
-type Service = ShortService & {
-  description: string;
-  availability: string;
-  duration: string;
-  otherInformation: string;
-  personId: string;
-};
-
 type MenuLinks = Array<{
   path: string;
   name: string;
@@ -37,4 +23,17 @@ type MenuLinks = Array<{
   showSubmenu?: boolean;
 }>;
 
-export type { ShortService, ShortProject, Service, MenuLinks, ShortPerson };
+type TimelineEvent = {
+  date: string;
+  eventInfo: string;
+  projectId: string;
+  timelineEventId: string;
+};
+
+export type {
+  ShortService,
+  ShortProject,
+  MenuLinks,
+  ShortPerson,
+  TimelineEvent,
+};

@@ -55,7 +55,7 @@ const projects = await $fetch<ShortProject[]>('/api/projects');
           :to="'/what-we-do/projects/' + project.slug"
           :src="project.picture"
           :alt="'Image for ' + project.name"
-          :name="project.name + ' - ' + project.timeline"
+          :name="project.name"
           width="w-[250px]"
         />
       </li>

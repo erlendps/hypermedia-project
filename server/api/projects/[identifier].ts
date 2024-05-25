@@ -18,9 +18,7 @@ export default defineEventHandler(async (event) => {
 
   const { data, error } = await client
     .from('Project')
-    .select(
-      '*, Person(firstName, lastName, slug, picture), TimelineEvent(date)'
-    )
+    .select('*, Person(firstName, lastName, slug, picture), TimelineEvent(*)')
     .eq(key, identifier)
     .single();
 
@@ -32,5 +30,27 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  return data;
+  let firstDate = new Date(
+    data.TimelineEvent.reduce((acc, curr) => {
+      if (acc.date < curr.date) return acc;
+      return curr;
+    }).date
+  );
+  let lastDate = new Date(
+    data.TimelineEvent.reduce((acc, curr) => {
+      if (acc.date > curr.date) return acc;
+      return curr;
+    }).date
+  );
+
+  // Make a string of the timeline in the format "Jan '24 - Dec '24"
+  let timeline = `${firstDate.toLocaleString('default', {
+    month: 'short',
+  })} '${firstDate
+    .getFullYear()
+    .toString()
+    .slice(-2)} - ${lastDate.toLocaleString('default', {
+    month: 'short',
+  })} '${lastDate.getFullYear().toString().slice(-2)}`;
+  return { ...data, timeline };
 });

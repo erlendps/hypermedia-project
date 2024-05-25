@@ -1,6 +1,6 @@
-import { serverSupabaseClient } from "#supabase/server";
-import { validate as validateUUID } from "uuid";
-import { Database } from "~/types/supabase";
+import { serverSupabaseClient } from '#supabase/server';
+import { validate as validateUUID } from 'uuid';
+import { Database } from '~/types/supabase';
 
 export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient<Database>(event);
@@ -8,18 +8,18 @@ export default defineEventHandler(async (event) => {
   if (!identifier) {
     throw createError({
       statusCode: 400,
-      statusMessage: "No identifier supplied.",
+      statusMessage: 'No identifier supplied.',
     });
   }
 
   let key: string;
-  if (validateUUID(identifier)) key = "serviceId";
-  else key = "slug";
+  if (validateUUID(identifier)) key = 'serviceId';
+  else key = 'slug';
 
   const { data, error } = await client
-    .from("Service")
+    .from('Service')
     .select(
-      "*, Person(firstName, lastName, slug, picture), Testimonial(endorser, testimonialText)"
+      '*, Person(firstName, lastName, slug, picture), Testimonial(endorser, testimonialText)'
     )
     .eq(key, identifier)
     .single();
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
     console.error(error);
     throw createError({
       statusCode: 404,
-      statusMessage: "Service not found",
+      statusMessage: 'Service not found',
     });
   }
 
