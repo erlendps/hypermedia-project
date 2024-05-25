@@ -21,6 +21,7 @@ defineProps({
   },
   src: {
     type: String,
+    required: true,
   },
   alt: {
     type: String,
@@ -42,12 +43,12 @@ defineProps({
       :class="width ? width : ''"
       class="flex flex-col items-center text-purple font-bold hover:text-purple-900 group"
     >
-      <img
+      <LoadingImage
         :src
         :alt
         height="200"
-        class="h-[200px] w-full border-2 border-purple group-hover:border-purple-900 rounded-t-lg object-cover"
-        @error="($event.target as HTMLImageElement).src = notFound"
+        common-class="h-[200px] w-full border-2 border-purple group-hover:border-purple-900 rounded-t-lg"
+        class-img="object-cover"
       />
       <span>{{ name }}</span>
       <span v-if="extraText">{{ extraText }}</span>
