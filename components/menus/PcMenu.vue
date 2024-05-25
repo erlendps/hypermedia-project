@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type MenuLinks } from '~/types';
+import { type MenuLinks } from '~/types/types';
 
 const props = defineProps<{
   links: MenuLinks;
