@@ -21,9 +21,10 @@ const links = ref([
     path: '/what-we-do',
     name: 'What we do',
     submenu: [
-      { path: '/what-we-do/projects', name: 'Projects' },
       { path: '/what-we-do/services', name: 'Services' },
+      { path: '/what-we-do/projects', name: 'Projects' },
     ],
+
     showSubmenu: false,
   },
   { path: '/contact', name: 'Contact us' },
