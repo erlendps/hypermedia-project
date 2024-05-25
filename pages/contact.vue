@@ -50,17 +50,15 @@ import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
     <h2 class="font-bold text-md sm:text-xl text-purple mb-4">
       Want to write to us?
     </h2>
-    <div class="flex flex-col lg:flex-row gap-16 items-center">
+    <div class="flex flex-col lg:flex-row gap-8 items-center">
       <div>
-        <h2 class="font-bold text-xl sm:text-lg text-purple mb-4">
+        <h2 class="font-bold text-md sm:text-lg text-purple">
           General inquires
         </h2>
         <p class="w-72 text-lg">help@fortiesmulier.org</p>
       </div>
       <div>
-        <h2 class="font-bold text-md sm:text-lg text-purple mb-4">
-          Press contact
-        </h2>
+        <h2 class="font-bold text-md sm:text-lg text-purple">Press contact</h2>
         <p class="w-72 text-lg">press@fortiesmulier.org</p>
       </div>
     </div>
