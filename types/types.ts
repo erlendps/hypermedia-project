@@ -32,6 +32,7 @@ type TimelineEvent = {
 
 export type {
   ShortService,
+  Service,
   ShortProject,
   MenuLinks,
   ShortPerson,

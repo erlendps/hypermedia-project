@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { FireIcon, HeartIcon, MusicalNoteIcon } from '@heroicons/vue/24/solid';
-import shuffle from '@stdlib/random-shuffle';
+import {
+  FireIcon,
+  HeartIcon,
+  MusicalNoteIcon,
+} from '@heroicons/vue/24/outline';
+
+// fetch data from server
 const route = useRoute();
 const { data: dbResult } = await useFetch(`/api/services/${route.params.slug}`);
+
 if (!dbResult.value) {
   throw createError({
     statusCode: 404,
@@ -10,36 +16,44 @@ if (!dbResult.value) {
   });
 }
 
-const indexes = shuffle([0, 1, 2]);
+// FireIcon is index 0
+// HeartIcon is index 1
+// MusicalNoteIcon is index 2
+const icons = [FireIcon, HeartIcon, MusicalNoteIcon];
 
-const service = computed(() => {
-  return {
-    name: dbResult.value!.name,
-    slug: dbResult.value!.slug,
-    picture: dbResult.value!.picture,
-    description: dbResult.value!.description,
-    availability: dbResult.value!.availability,
-    duration: dbResult.value!.availability,
-    otherInformation: dbResult.value?.otherInformation,
-    responsible: {
-      name:
-        dbResult.value!.Person!.firstName +
-        ' ' +
-        dbResult.value!.Person!.lastName,
-      slug: dbResult.value!.Person!.slug,
-      picture: dbResult.value!.Person!.picture,
-    },
-    testimonials: dbResult.value!.Testimonial.map((testimonial, i) => {
-      return { ...testimonial, icon: indexes[i % 3], key: i };
-    }),
-  };
-});
+// a sort of hack to "assert" that the values you get from db is
+// not null (we know this since we required it in db).
+const service = {
+  name: dbResult.value!.name, // service name
+  slug: dbResult.value!.slug, // service slug
+  picture: dbResult.value!.picture, // service picture
+  description: dbResult.value!.description, // service description
+  availability: dbResult.value!.availability, // service availability
+  duration: dbResult.value!.duration, // service duration
+  otherInformation: dbResult.value?.otherInformation, // other practical information
+  // responsible person, we only need data to create the preview component
+  responsible: {
+    name:
+      dbResult.value!.Person!.firstName +
+      ' ' +
+      dbResult.value!.Person!.lastName,
+    slug: dbResult.value!.Person!.slug,
+    picture: dbResult.value!.Person!.picture,
+  },
+  // testimonials. Along with the values, add a key and also the icon it should be rendered with
+  testimonials: dbResult.value!.Testimonial.map((testimonial, i) => {
+    return { ...testimonial, icon: icons[i % 3], key: i };
+  }),
+};
 </script>
 <template>
+  <!-- the main container places all direct children vertically (flex-col), and centers them vertically -->
   <div class="flex flex-col items-center text-center">
     <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4">
       {{ service.name }}
     </h1>
+    <!-- Container for the service image and the responsible person. The entire container for
+    the responsible person is centered. -->
     <div class="w-full mb-6">
       <LoadingImage
         :src="service.picture"
@@ -65,8 +79,13 @@ const service = computed(() => {
     <p>
       The center offers a wide array of services designed to support women in
       need, each with specific availability, duration, and additional practical
-      information.
+      information. Here is some practical information regarding this service.
     </p>
+    <!--
+      The practical information (availability, duration and other information) consist of 2 containers
+      Availability and duration is grouped together so that we can place them horizontally. When the
+      screen is small enough, it switches to placing all text underneath each other.
+    -->
     <div
       class="flex flex-col gap-3 sm:gap-0 sm:flex-row sm:justify-around sm:items-center w-full mt-4"
     >
@@ -74,6 +93,7 @@ const service = computed(() => {
         <h3 class="font-bold text-lg text-purple mb-2">Availability</h3>
         <p>{{ service.availability }}</p>
       </div>
+      <!-- we want a vertical separator, so we create one using a div and specify the role and orientation -->
       <div
         role="separator"
         aria-orientation="vertical"
@@ -84,6 +104,7 @@ const service = computed(() => {
         <p>{{ service.duration }}</p>
       </div>
     </div>
+    <!-- Only render if the service has other practical information (it can be null) -->
     <div v-if="service.otherInformation" class="mt-4">
       <h3 class="font-bold text-lg text-purple mb-2">Good to know</h3>
       <p>{{ service.otherInformation }}</p>
@@ -92,36 +113,60 @@ const service = computed(() => {
     <h2 class="font-bold text-2xl text-purple mb-4">
       Read how the service has benefitted others
     </h2>
-    <ul class="flex flex-col w-full gap-6">
+    <!--
+      Testimonials are wrapped in a list for semantic reasons.
+    -->
+    <ul class="flex flex-col w-full gap-8">
       <li
         v-for="testimonial in service.testimonials"
         :key="testimonial.key"
-        class="w-full even:text-right odd:text-left text-lg group"
+        class="w-full text-lg group"
       >
-        <div class="flex w-full flex-col">
+        <!--
+          Depending on whether the list element is an odd or even child, we align the text
+          either left (odd) or right (even).
+         -->
+        <div class="flex flex-col group-even:text-right group-odd:text-left">
+          <!--
+            We group the quote and icon together, so that we can center the icon vertically,
+            in relation to the height of the quote. When the list element is even, we have to
+            switch the order of the quote and icon.
+            
+            When the icon is to be rendered (screens wider than 640px), the quote and container
+            for the icon each take 50% of the full width, this is mostly done so that we can
+            center the icon horizontally more easily.
+          -->
           <div
             class="w-full flex flex-row group-even:flex-row-reverse group-even:self-end group-odd:self-start"
           >
             <blockquote
-              class="before:content-[open-quote] after:content-[close-quote] italic w-11/12 sm:w-1/2"
+              class="before:content-[open-quote] after:content-[close-quote] italic w-full sm:w-1/2"
             >
               {{ testimonial.testimonialText }}
             </blockquote>
-            <div class="hidden sm:flex justify-center items-center sm:w-1/2">
-              <FireIcon
-                v-if="testimonial.icon === 0"
-                class="w-24 h-24 text-purple rotate-12"
+            <div
+              class="hidden text-pink sm:flex justify-center items-center sm:w-1/2"
+            >
+              <component
+                :is="testimonial.icon"
+                class="w-24 h-24 group-odd:rotate-12 group-even:-rotate-12"
               />
-              <HeartIcon
-                v-else-if="testimonial.icon === 1"
-                class="w-24 h-24 text-purple"
-              />
-              <MusicalNoteIcon v-else class="w-24 h-24 text-purple" />
             </div>
           </div>
           <span class="font-bold">{{ testimonial.endorser }}</span>
         </div>
-        <hr class="border rounded-lg border-purple w-2/6 mx-auto" />
+        <!--
+          To get the horizontal line to be centered under the actual quote, we can
+          wrap it in a container with the same width as the blockquote, and then
+          center the hr element and set a width.
+          We also have to position it absolutely so that we can "push" the container
+          either left or right depending on the parity of the list element.
+        -->
+        <div
+          class="w-full sm:w-1/2 absolute group-even:right-0 group-odd:left-0"
+        >
+          <hr class="border rounded-lg border-purple w-2/6 mx-auto" />
+        </div>
       </li>
     </ul>
   </div>

@@ -1,14 +1,4 @@
-<template>
-  <nav class="bg-purple text-white p-4">
-    <div class="flex justify-between items-center">
-      <PcMenu :links="links" class="hidden md:block" />
-      <MobileMenu :links="links" class="md:hidden relative z-35" />
-    </div>
-  </nav>
-</template>
-
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
 import PcMenu from '~/components/menus/PcMenu.vue';
 import MobileMenu from '~/components/menus/MobileMenu.vue';
 
@@ -20,7 +10,6 @@ const links = ref([
       { path: '/what-we-do/services', name: 'Services' },
       { path: '/what-we-do/projects', name: 'Projects' },
     ],
-
     showSubmenu: false,
   },
   { path: '/contact', name: 'Contact us' },
@@ -28,3 +17,12 @@ const links = ref([
   { path: '/staff', name: 'Our staff' },
 ]);
 </script>
+
+<template>
+  <nav class="bg-purple text-white p-4">
+    <div class="flex justify-between items-center">
+      <PcMenu :links="links" class="hidden md:block" />
+      <MobileMenu :links="links" class="md:hidden relative z-35" />
+    </div>
+  </nav>
+</template>

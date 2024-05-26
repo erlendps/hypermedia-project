@@ -1,3 +1,32 @@
+<script setup lang="ts">
+import { Bars3Icon } from '@heroicons/vue/24/outline';
+import { ref } from 'vue';
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+watch(
+  () => route.fullPath,
+  () => {
+    isOpen.value = false;
+  }
+);
+
+defineProps({
+  links: {
+    type: Array<{
+      path: string;
+      name: string;
+      submenu?: Array<{ path: string; name: string }>;
+      showSubmenu?: boolean;
+    }>,
+    required: true,
+  },
+});
+
+const isOpen = ref(false);
+</script>
+
 <template>
   <button
     @click="isOpen = !isOpen"
@@ -31,32 +60,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { Bars3Icon } from '@heroicons/vue/24/outline';
-import { ref } from 'vue';
-import { watch } from 'vue';
-import { useRoute } from 'vue-router';
-
-const route = useRoute();
-watch(
-  () => route.fullPath,
-  () => {
-    isOpen.value = false;
-  }
-);
-
-defineProps({
-  links: {
-    type: Array<{
-      path: string;
-      name: string;
-      submenu?: Array<{ path: string; name: string }>;
-      showSubmenu?: boolean;
-    }>,
-    required: true,
-  },
-});
-
-const isOpen = ref(false);
-</script>
