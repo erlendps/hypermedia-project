@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import type { ShortProject, ShortService } from '~/types/types';
+import type { ShortProject, ShortService } from "~/types/types";
 
 useSeoMeta({
-  title: 'Our efforts',
-  ogTitle: 'Our efforts',
-  description: 'The projects and services of Forties Mulier.',
-  ogDescription: 'The projects and services of Forties Mulier.',
+  title: "Our efforts - Forties Mulier",
+  ogTitle: "Our efforts - Forties Mulier",
+  description:
+    "This page contains the projects and services of Forties Mulier.",
+  ogDescription:
+    "This page contains the projects and services of Forties Mulier.",
 });
 
 // get the services from the api
-const projects = await $fetch<ShortProject[]>('/api/projects').then(
+const projects = await $fetch<ShortProject[]>("/api/projects").then(
   (projects) => projects.slice(0, 3)
 );
-const services = await $fetch<ShortService[]>('/api/services').then(
+const services = await $fetch<ShortService[]>("/api/services").then(
   (services) => services.slice(0, 3)
 );
 </script>

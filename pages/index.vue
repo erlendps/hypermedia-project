@@ -1,3 +1,14 @@
+<script setup lang="ts">
+useSeoMeta({
+  title: "Home - Forties Mulier",
+  ogTitle: "Home - Forties Mulier",
+  description:
+    "This is the homepage of Forties Mulier, a non-profit organization helping women that have experience domestic violence or mistreatment.",
+  ogDescription:
+    "This is the homepage of Forties Mulier, a non-profit organization helping women that have experience domestic violence or mistreatment.",
+});
+</script>
+
 <template>
   <div class="flex flex-col items-center text-center">
     <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4">

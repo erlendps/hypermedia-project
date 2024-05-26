@@ -2,14 +2,14 @@
 import type { ShortService } from '~/types/types';
 
 useSeoMeta({
-  title: 'Our services',
-  ogTitle: 'Our Services',
+  title: 'Our services - Forties Mulier',
+  ogTitle: 'Our Services - Forties Mulier',
   description: 'The services Forties Mulier offer to women in need.',
   ogDescription: 'The services Forties Mulier offer to women in need.',
 });
 
 // get the services from the api
-const services = await $fetch<ShortService[]>('/api/services');
+const { data: services } = await useFetch('/api/services');
 </script>
 <template>
   <div class="flex flex-col items-center text-center">

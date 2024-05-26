@@ -10,18 +10,31 @@ if (!dbResult.value) {
   });
 }
 
-const person = computed(() => {
-  /**firstName,lastName,mainRole,education,pastExperience,expertise,slug,picture*/
-  return {
-    name: `${dbResult.value!.firstName} ${dbResult.value!.lastName}`,
-    picture: dbResult.value!.picture,
-    mainRole: dbResult.value!.mainRole,
-    education: dbResult.value!.education,
-    pastExperience: dbResult.value!.pastExperience,
-    expertise: dbResult.value!.expertise,
-    services: dbResult.value!.Service,
-    projects: dbResult.value!.Project,
-  };
+const person = {
+  name: `${dbResult.value!.firstName} ${dbResult.value!.lastName}`,
+  picture: dbResult.value!.picture,
+  mainRole: dbResult.value!.mainRole,
+  education: dbResult.value!.education,
+  pastExperience: dbResult.value!.pastExperience,
+  expertise: dbResult.value!.expertise,
+  services: dbResult.value!.Service,
+  projects: dbResult.value!.Project,
+};
+
+useSeoMeta({
+  title: `${person.name} - Forties Mulier`,
+  ogTitle: `${person.name} - Forties Mulier`,
+  description: `
+  This is the page for Forties Mulier staff member ${person.name}. It contains information about
+  ${person.name} such as their main role in Forties Mulier, past experience, expertise and projects
+  and services they are responsible for.
+  `,
+  ogDescription: `
+  This is the page for Forties Mulier staff member ${person.name}. It contains information about
+  ${person.name} such as their main role in Forties Mulier, past experience, expertise and projects
+  and services they are responsible for.
+  `,
+  ogImage: person.picture,
 });
 </script>
 <template>
