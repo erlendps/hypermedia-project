@@ -1,15 +1,25 @@
 <template>
   <!-- Chatbot Chat box -->
   <div class="chatbot_window" v-if="isOpen">
-    <div class="chatHeader"></div>
+    <div class="chatHeader">
+      <h2>Chatbot</h2>
+      <img @click="toggleChatbot" src="~/assets/img/close_chat.png" alt="Close">
+    </div>
     <div class="messages">
       <div v-for="message in messages" :key="message.id" :class="['message', message.role]">
-        {{ message.content }}
+        <div v-if="message.role === 'assistant'">
+          <img src="~/assets/img/robot_icon.png">
+          <p>{{ message.content }}</p>
+        </div>
+        <div v-else>
+          <img src="~/assets/img/user_icon.png">
+          <p>{{ message.content }}</p>
+        </div>
       </div>
     </div>
     <div class="input_row">
-      <textarea v-model="input" @input="handleInput" placeholder="Type a message..."></textarea>     
-      <button><img @click="sendMessage" src="~/assets/img/send_msg.png"></button>
+      <textarea v-model="input" @keydown.enter.exact="sendMessage" placeholder="Type a message..."></textarea>
+      <img @click="sendMessage" src="~/assets/img/send_msg.png">
     </div>
   </div>
 
@@ -20,14 +30,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+let first_open = true;
 const isOpen = ref(false);
 
 const toggleChatbot = () => {
-  isOpen.value = !isOpen.value
-}
+  if (first_open) {
+    // add this later
+    first_open = false;
+  }
 
-const handleInput = () => {
-  console.log(input.value);
+  isOpen.value = !isOpen.value
 }
 
 const messages = ref<{ id: number; role: string; content: string }[]>([]);
@@ -36,14 +48,16 @@ const input = ref('');
 const sendMessage = async () => {
   if (!input.value) return;
 
+  
+
   const userMessage = {
     id: Date.now(),
     role: 'user',
     content: input.value,
   };
 
-  messages.value.push(userMessage);
   input.value = '';
+  messages.value.push(userMessage);
 
   try {
     /*
@@ -70,7 +84,7 @@ const sendMessage = async () => {
       console.error('Unexpected API response:', data);
     }
     */
-    messages.value.push({id: 2, role:"test", content:"Test test :)))"});
+    messages.value.push({ id: 2, role: "assistant", content: "Test test :)))" });
   } catch (error) {
     console.error('Error sending message:', error);
   }
@@ -80,10 +94,18 @@ const sendMessage = async () => {
 <style scoped>
 .chatbot_closed {
   position: fixed;
-  width: 70px;
+  width: 60px;
   bottom: 80px;
   right: 100px;
   padding: 0;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.chatbot_closed:hover {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
 .chatbot_window {
@@ -92,62 +114,139 @@ const sendMessage = async () => {
   right: 100px;
   padding: 0;
   width: 300px;
-  height: 400px;
+  height: 450px;
   background-color: rgb(255, 255, 255);
   border-width: 4px;
-  border-color: rebeccapurple;
+  border-color: #584ABC;
   border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: 1000;
+  overflow: hidden;
+}
+
+.chatHeader {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #584ABC;
+}
+
+.chatHeader h2 {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-left: 15px;
+  font-size: 22px;
+  font-style: bold;
+  color: white;
+}
+
+.chatHeader img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.chatHeader img {
+  width: 10%;
+  justify-content: flex-end;
+  margin-right: 17px;
+  margin-bottom: 3px;
+  right: 0px;
+  opacity: 1;
+  transition: opacity 0.2s;
 }
 
 .messages {
-  flex: 1;
+  margin-top: 50px;
+  max-height: 333px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .message {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
   padding: 10px;
-  margin: 5px 0;
-}
-
-.message.user {
-  align-self: flex-end;
-  background-color: #daf1da;
+  box-sizing: border-box;
+  word-wrap: break-word;
 }
 
 .message.assistant {
-  align-self: flex-start;
-  background-color: #f1f1f1;
+  justify-content: flex-start;
+}
+
+.message.assistant p {
+  border-radius: 10px;
+  padding:3px;
+  font-size:smaller;
+  background-color: #F3A5BC;
+}
+
+.message.assistant img {
+  width: 25%;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.user p {
+  border-radius: 10px;
+  padding:3px;
+  text-align: left;
+  font-size:smaller;
+  background-color: #584ABC;
+}
+
+.message.user img {
+  width: 25%;
 }
 
 .input_row {
+  display: flex;
   position: absolute;
   bottom: 0px;
-  right: 0px;
-  left: 0px;
   height: 60px;
-  display: flex;
   align-items: center;
+  justify-content: space-between;
   border-top: 1px solid #ccc;
 }
 
-.input_row textarea{
-
-
-  flex: 1; 
+.input_row textarea {
   padding: 10px;
+  padding-top: 11px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #eeeeee;
+  width: 100%;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical; 
-  max-height: 100px;
+  border-radius: 15px;
+  font-size: smaller;
+  max-height: 45px;
   overflow-y: auto;
   resize: none;
 }
 
-
-.input_row img{
-  width: 50%;
+.input_row img {
+  width: 10%;
+  margin-right: 10px;
+  right: 0px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s;
 }
 
-
+.input_row img:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
 </style>
