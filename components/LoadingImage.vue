@@ -32,6 +32,9 @@ defineProps({
       return ["sm", "lg"].includes(value);
     },
   },
+  describedBy: {
+    type: String,
+  },
 });
 
 const isLoaded = ref(false);
@@ -83,6 +86,7 @@ const handleLoaded = () => {
       :class="[classImg, commonClass]"
       @load="handleLoaded"
       @error="($event.target as HTMLImageElement).src = notFound"
+      :aria-describedby="describedBy"
     />
   </ClientOnly>
 </template>

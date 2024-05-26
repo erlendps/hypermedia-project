@@ -45,15 +45,19 @@ useSeoMeta({
 
         Our staff
       </NuxtLink>
-      <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4">
+      <h1
+        id="person-name"
+        class="font-bold text-3xl sm:text-4xl text-purple mb-4"
+      >
         {{ person.name }}
       </h1>
     </div>
     <div class="flex flex-col md:flex-row gap-8 w-full items-center">
       <SquareWithImage
         :src="person.picture"
-        :alt="`Image of ${person.name}`"
+        alt=""
         class="min-w-[350px] h-[350px] rounded-full"
+        described-by="person-name"
       />
       <div class="flex flex-col gap-4 text-left ml-12 pt-2">
         <div>

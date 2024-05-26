@@ -16,9 +16,9 @@ useSeoMeta({
     Our staff is here to help you
   </h1>
   <img
-    src="assets/images/group.webp"
-    alt="Image of our staff"
+    src="~/assets/images/group.webp"
     class="w-full object-cover rounded-lg mb-4 border-2 border-purple"
+    alt="Overview of all our current staff members."
   />
   <p class="text-center">
     Our dedicated team of professionals is committed to supporting you through
@@ -40,8 +40,9 @@ useSeoMeta({
         :key="person.slug"
         :src="person.picture"
         :to="'/staff/' + person.slug"
-        :alt="`Image of ${person.firstName + ' ' + person.lastName}`"
+        alt=""
         :name="person.firstName + ' ' + person.lastName"
+        :extra-text="person.mainRole"
         width="w-[200px]"
       />
     </div>

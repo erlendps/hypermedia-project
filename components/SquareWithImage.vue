@@ -32,6 +32,9 @@ const props = defineProps({
     type: String,
     default: "h-[150px]",
   },
+  describedBy: {
+    type: String,
+  },
 });
 
 const rounding = computed(() => {
@@ -44,6 +47,7 @@ const rounding = computed(() => {
     <LoadingImage
       :src
       :alt
+      :described-by="describedBy"
       :common-class="`w-full h-full border-2 border-purple ${rounding}`"
       :class-img="`object-cover`"
       height="150"

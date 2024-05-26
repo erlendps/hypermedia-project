@@ -63,7 +63,7 @@ useSeoMeta({
           <PersonPreview
             :to="`/staff/${project.responsible.slug}`"
             :src="project.responsible.picture"
-            :alt="`Image of ${project.responsible.name}`"
+            alt=""
             :name="project.responsible.name"
             class="md:left-8"
           />

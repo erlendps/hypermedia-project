@@ -10,7 +10,7 @@
  * @prop to {String} - link to where this preview points.
  * @prop width {String} - tailwindcss class of width
  */
-defineProps({
+const props = defineProps({
   name: {
     type: String,
     required: true,
@@ -34,13 +34,17 @@ defineProps({
     type: String,
   },
 });
+
+const ariaDescribedBy = computed(() => {
+  return `preview-${props.name.replace(/\s/g, "-").toLowerCase()}`;
+});
 </script>
 
 <template>
   <NuxtLink :to>
     <div
       :class="width ? width : ''"
-      class="flex flex-col items-center text-purple font-bold hover:text-purple-900 group"
+      class="flex flex-col items-center text-purple hover:text-purple-900 group text-center"
     >
       <LoadingImage
         :src
@@ -48,9 +52,10 @@ defineProps({
         height="200"
         common-class="h-[200px] w-full border-2 border-purple group-hover:border-purple-900 rounded-t-lg"
         class-img="object-cover"
+        :described-by="ariaDescribedBy"
       />
-      <span>{{ name }}</span>
-      <span v-if="extraText">{{ extraText }}</span>
+      <p :id="ariaDescribedBy" class="font-bold">{{ name }}</p>
+      <p v-if="extraText">{{ extraText }}</p>
     </div>
   </NuxtLink>
 </template>
