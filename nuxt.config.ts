@@ -1,4 +1,10 @@
 export default defineNuxtConfig({
+  runtimeConfig: {
+    openaiApiKey: "",
+    public: {
+      baseUrl: "",
+    },
+  },
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   postcss: {
@@ -7,12 +13,29 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@nuxtjs/supabase"],
+  modules: ["@nuxtjs/supabase", "nuxt-primevue"],
   supabase: {
     redirect: false,
   },
-  // Add the publicRuntimeConfig to expose environment variables to the app
-  runtimeConfig: {
-    openaiApiKey: "",
+  primevue: {
+    options: {
+      unstyled: true,
+    },
+  },
+  app: {
+    head: {
+      title: "Forties Mulier",
+      charset: "utf-8",
+      link: [
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/favicon.png",
+        },
+      ],
+      htmlAttrs: {
+        lang: "en",
+      },
+    },
   },
 });

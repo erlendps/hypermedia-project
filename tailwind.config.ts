@@ -75,6 +75,9 @@ export default {
       fontFamily: {
         sans: ["Nunito", ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        xs: "450px",
+      },
     },
   },
   plugins: [],
