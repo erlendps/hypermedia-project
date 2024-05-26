@@ -1,24 +1,36 @@
 <template>
   <!-- Chatbot Chat box -->
   <div class="chatbot_window" v-if="isOpen">
+    <!-- Chat header -->
     <div class="chatHeader">
       <h2>Chatbot</h2>
       <img @click="toggleChatbot" src="~/assets/img/close_chat.png" alt="Close">
     </div>
-    <div class="messages">
+    <!-- Messages container -->
+    <div class="messages" ref="messagesContainer">
+      <!-- Render each message -->
       <div v-for="message in messages" :key="message.id" :class="['message', message.role]">
-        <div v-if="message.role === 'assistant'">
+        <!-- Assistant message -->
+        <div v-if="message.role === 'assistant'" id="assistant_row">
           <img src="~/assets/img/robot_icon.png">
           <p>{{ message.content }}</p>
         </div>
-        <div v-else>
+        <!-- Typing indicator -->
+        <div v-else-if="message.role === 'typing'" id="typing_row">
+          <img src="~/assets/img/robot_icon.png">
+          <p>{{ message.content }}</p>
+        </div>
+        <!-- User message -->
+        <div v-else id="user_row">
           <img src="~/assets/img/user_icon.png">
           <p>{{ message.content }}</p>
         </div>
       </div>
     </div>
+    <!-- Input area -->
     <div class="input_row">
-      <textarea v-model="input" @keydown.enter.exact="sendMessage" placeholder="Type a message..."></textarea>
+      <textarea id="textInput" v-model="input" @keydown.enter.prevent="sendMessage"
+        placeholder="Type a message..."></textarea>
       <img @click="sendMessage" src="~/assets/img/send_msg.png">
     </div>
   </div>
@@ -29,26 +41,45 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-let first_open = true;
+import { ref, nextTick } from 'vue';
+
+let firstOpen = true;
+
+// Variable to control the chatbot visibility
 const isOpen = ref(false);
 
+// Toggle chatbot visibility
 const toggleChatbot = () => {
-  if (first_open) {
-    // add this later
-    first_open = false;
+  if (firstOpen) {
+    // Initial message when chatbot is opened for the first time
+    const firstMessage = {
+      id: Date.now(),
+      role: 'assistant',
+      content: "Hey! I'm Emily, here to assist you in any way I can. Need help navigating the website or just someone to talk to? Feel free to ask!",
+    };
+    messages.value.push(firstMessage);
+    firstOpen = false;
   }
 
-  isOpen.value = !isOpen.value
-}
+  isOpen.value = !isOpen.value;
+};
 
+// Array to store chat messages
 const messages = ref<{ id: number; role: string; content: string }[]>([]);
+
 const input = ref('');
 
+// Function to scroll messages container to the bottom
+const scrollToBottom = () => {
+  const messagesContainer = document.querySelector('.messages');
+  if (messagesContainer) {
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+};
+
+// Function to send a message
 const sendMessage = async () => {
   if (!input.value) return;
-
-  
 
   const userMessage = {
     id: Date.now(),
@@ -57,37 +88,56 @@ const sendMessage = async () => {
   };
 
   input.value = '';
+
   messages.value.push(userMessage);
 
+  await nextTick();
+  scrollToBottom();
+
   try {
-    /*
+    // Add typing indicator
+    const botMessage = {
+      id: Date.now() + 1,
+      role: 'typing',
+      content: '...',
+    };
+
+    messages.value.push(botMessage);
+
+    // Scroll to bottom after rendering typing indicator
+    await nextTick();
+    scrollToBottom();
+
+    // Send messages to the server and receive response
     const response = await fetch('/api/chatbot', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ messages: messages.value }),
+      body: JSON.stringify({ messages: messages.value.slice(0, -1) }), // Exclude the typing indicator from the request
     });
 
+    // Find the index of the typing indicator message
+    const currentMessageIndex = messages.value.findIndex(message => message.content === '...');
     const data = await response.json();
-    //console.log('API Response:', data); 
 
+    // Handle API response
     if (data.choices && data.choices.length > 0) {
-      const botMessage = {
-        id: Date.now() + 1,
-        role: 'assistant',
-        content: data.choices[0].message.content,
-      };
-      
-      messages.value.push(botMessage);
+      if (currentMessageIndex !== -1) {
+        // Update the typing indicator to the assistant message
+        messages.value[currentMessageIndex].role = "assistant";
+        messages.value[currentMessageIndex].content = data.choices[0].message.content;
+      }
     } else {
       console.error('Unexpected API response:', data);
     }
-    */
-    messages.value.push({ id: 2, role: "assistant", content: "Test test :)))" });
   } catch (error) {
     console.error('Error sending message:', error);
   }
+
+  // Scroll to bottom after rendering assistant message or handling error
+  await nextTick();
+  scrollToBottom();
 };
 </script>
 
@@ -170,29 +220,54 @@ const sendMessage = async () => {
 }
 
 .message {
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+  margin-bottom: 5px;
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
-  word-wrap: break-word;
 }
 
-.message.assistant {
-  justify-content: flex-start;
+.message p {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 13px;
+  width: 220px;
+}
+
+.message img {
+  margin-top: 11px;
+  width: 25px;
+  height: 25px;
+}
+
+#assistant_row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+#typing_row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+#user_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .message.assistant p {
-  border-radius: 10px;
-  padding:3px;
-  font-size:smaller;
   background-color: #F3A5BC;
 }
 
-.message.assistant img {
-  width: 25%;
+.message.typing p {
+  background-color: #F3A5BC;
+  color: rgb(77, 77, 77);
+  width: 25px;
 }
 
 .message.user {
@@ -200,15 +275,13 @@ const sendMessage = async () => {
 }
 
 .message.user p {
-  border-radius: 10px;
-  padding:3px;
   text-align: left;
-  font-size:smaller;
   background-color: #584ABC;
+  color: white;
 }
 
 .message.user img {
-  width: 25%;
+  order: 2;
 }
 
 .input_row {
@@ -230,7 +303,7 @@ const sendMessage = async () => {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 15px;
-  font-size: smaller;
+  font-size: 15px;
   max-height: 45px;
   overflow-y: auto;
   resize: none;
