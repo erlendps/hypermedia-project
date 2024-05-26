@@ -24,7 +24,7 @@ const props = defineProps<{
         <div class="flex flex-col items-center gap-2">
           <span>{{ event.date }}</span>
           <div class="h-1 bg-purple w-full" />
-          <span class="h-8">{{ event.eventInfo }}</span>
+          <span class="h-16 mb-4">{{ event.eventInfo }}</span>
         </div>
       </div>
     </div>
