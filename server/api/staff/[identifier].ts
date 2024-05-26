@@ -13,14 +13,12 @@ export default defineEventHandler(async (event) => {
   }
 
   let key: string;
-  if (validateUUID(identifier)) key = 'serviceId';
+  if (validateUUID(identifier)) key = 'personId';
   else key = 'slug';
 
   const { data, error } = await client
-    .from('Service')
-    .select(
-      '*, Person(firstName, lastName, slug, picture), Testimonial(endorser, testimonialText)'
-    )
+    .from('Person')
+    .select('*, Service(name, slug, picture), Project(name, slug, picture)')
     .eq(key, identifier)
     .single();
 

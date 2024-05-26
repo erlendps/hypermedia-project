@@ -4,8 +4,8 @@ import type { Database } from '~/types/supabase';
 export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient<Database>(event);
   const { data, error } = await client
-    .from('Service')
-    .select('name, picture, slug');
+    .from('Project')
+    .select('name, picture, slug, TimelineEvent(date)');
 
   if (error) {
     console.error(error);

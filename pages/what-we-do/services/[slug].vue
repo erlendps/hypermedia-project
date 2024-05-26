@@ -3,7 +3,7 @@ import {
   FireIcon,
   HeartIcon,
   MusicalNoteIcon,
-} from "@heroicons/vue/24/outline";
+} from '@heroicons/vue/24/outline';
 
 // fetch data from server
 const route = useRoute();
@@ -12,7 +12,7 @@ const { data: dbResult } = await useFetch(`/api/services/${route.params.slug}`);
 if (!dbResult.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: "Page Not Found",
+    statusMessage: 'Page Not Found',
   });
 }
 
@@ -35,7 +35,7 @@ const service = {
   responsible: {
     name:
       dbResult.value!.Person!.firstName +
-      " " +
+      ' ' +
       dbResult.value!.Person!.lastName,
     slug: dbResult.value!.Person!.slug,
     picture: dbResult.value!.Person!.picture,

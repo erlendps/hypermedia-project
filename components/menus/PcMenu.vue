@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MenuLinks } from "~/types/types";
+import type { MenuLinks } from '~/types/types';
 
 defineProps<{
   links: MenuLinks;
@@ -7,6 +7,9 @@ defineProps<{
 </script>
 
 <template>
+  <div class="text-3xl">
+    <NuxtLink to="/">Forties Mulier</NuxtLink>
+  </div>
   <div
     class="md:flex space-x-10 md:flex-row flex-col text-xl md:space-y-0 space-y-2 text-right hidden"
   >
