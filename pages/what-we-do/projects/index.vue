@@ -11,14 +11,6 @@ useSeoMeta({
   ogDescription: 'The projects Forties Mulier are currently working on.',
 });
 
-// create an array of objects for the "welcome" images that should be displayed
-// after the heading.
-const welcomeImages = [
-  { src: service1, alt: 'An attorney giving legal advice to a woman.' },
-  { src: service2, alt: 'A woman smiling while talking with a headset.' },
-  { src: service3, alt: 'A woman giving a speech in front of a small crowd.' },
-];
-
 // get the services from the api
 const projects = await $fetch<ShortProject[]>('/api/projects');
 </script>
@@ -27,11 +19,6 @@ const projects = await $fetch<ShortProject[]>('/api/projects');
     <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4">
       Our projects
     </h1>
-    <ul class="flex flex-wrap gap-4 justify-around w-full mb-4">
-      <li v-for="image in welcomeImages">
-        <SquareWithImage :src="image.src" :alt="image.alt" />
-      </li>
-    </ul>
     <p>
       At Forties Mulier, we are passionately committed to empowering women and
       fostering positive change through a range of impactful projects. Our

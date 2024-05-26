@@ -24,9 +24,9 @@ import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
         well-being are our top priorities.
       </p>
       <img
-        src="/assets/images/service2.jpg"
-        alt="A black and white photo of the center from the 1940s"
-        class="h-64"
+        src="/assets/images/phone.webp"
+        alt="A woman talking in the phone"
+        class="h-64 border-2 border-purple rounded-lg"
       />
     </div>
     <Divider />

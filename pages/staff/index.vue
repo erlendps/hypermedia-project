@@ -3,9 +3,9 @@
     Our staff is here to help you
   </h1>
   <img
-    src="assets/images/not_found.svg"
+    src="assets/images/group.webp"
     alt="Image of our staff"
-    class="w-full h-[250px] object-cover rounded-lg mb-4"
+    class="w-full object-cover rounded-lg mb-4 border-2 border-purple"
   />
   <p class="text-center">
     Our dedicated team of professionals is committed to supporting you through
