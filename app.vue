@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen w-screen flex flex-col justify-start bg-white">
-    <header class="w-100 bg-purple p-4 sticky top-0">
+    <header class="w-100 bg-purple p-4 sticky top-0 z-40">
       <AppHeader />
     </header>
     <main

@@ -19,10 +19,8 @@ const links = ref([
 </script>
 
 <template>
-  <nav class="bg-purple text-white p-4">
-    <div class="flex justify-between items-center">
-      <PcMenu :links="links" class="hidden md:block" />
-      <MobileMenu :links="links" class="md:hidden relative z-35" />
-    </div>
+  <nav class="bg-purple text-white w-full h-12">
+    <PcMenu :links="links" class="hidden md:flex" />
+    <MobileMenu :links="links" class="md:hidden" />
   </nav>
 </template>
