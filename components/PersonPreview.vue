@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   src: {
     type: String,
     required: true,
@@ -17,6 +17,10 @@ defineProps({
     required: true,
   },
 });
+
+const ariaDescribedBy = computed(() => {
+  return `avatar-${props.name.replace(/\s/g, "-").toLowerCase()}`;
+});
 </script>
 <template>
   <NuxtLink :to>
@@ -30,8 +34,9 @@ defineProps({
         height="50"
         common-class="h-full w-[50px] border-2 rounded-full"
         svg-size="sm"
+        :described-by="ariaDescribedBy"
       />
-      <span class="font-bold">{{ name }}</span>
+      <span :id="ariaDescribedBy" class="font-bold">{{ name }}</span>
     </div>
   </NuxtLink>
 </template>

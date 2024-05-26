@@ -56,14 +56,14 @@ useSeoMeta({
         class-img="object-cover"
       />
       <div
-        class="w-full border-t-2 border-x-2 border-purple rounded-t-3xl flex justify-between gap-2 items-center pt-3 relative px-2"
+        class="w-full border-t-2 border-x-2 border-purple rounded-t-3xl flex flex-col sm:flex-row sm:justify-between gap-2 items-center pt-3 px-2"
       >
         <div class="inline-flex items-center gap-2">
           Responsible:
           <PersonPreview
             :to="`/staff/${project.responsible.slug}`"
             :src="project.responsible.picture"
-            :alt="`Image of ${project.responsible.name}`"
+            alt=""
             :name="project.responsible.name"
             class="md:left-8"
           />

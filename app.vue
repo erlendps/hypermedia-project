@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen w-screen flex flex-col justify-start">
+  <div class="min-h-screen w-screen flex flex-col justify-start bg-white">
     <header class="w-100 bg-purple p-4 sticky top-0">
       <AppHeader />
     </header>

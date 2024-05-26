@@ -34,6 +34,9 @@ export default defineNuxtConfig({
           href: "/favicon.png",
         },
       ],
+      htmlAttrs: {
+        lang: "en",
+      },
     },
   },
 });

@@ -39,39 +39,44 @@ useSeoMeta({
 </script>
 <template>
   <div class="flex flex-col items-center text-center">
-    <div class="flex items-center justify-center w-full gap-4 relative">
-      <NuxtLink to="/staff" class="absolute left-0 text-purple inline-flex">
-        <ChevronLeftIcon class="w-6 h-6" />
-
-        Our staff
+    <div class="flex items-center justify-center w-full gap-4 mb-6 relative">
+      <NuxtLink
+        to="/staff"
+        class="absolute left-0 text-purple hover:text-purple-900 inline-flex"
+      >
+        <ChevronLeftIcon class="w-6 h-6 stroke-2" />
+        <p class="hidden sm:block">Our staff</p>
       </NuxtLink>
-      <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4">
+      <h1 id="person-name" class="font-bold text-3xl sm:text-4xl text-purple">
         {{ person.name }}
       </h1>
     </div>
     <div class="flex flex-col md:flex-row gap-8 w-full items-center">
       <SquareWithImage
         :src="person.picture"
-        :alt="`Image of ${person.name}`"
-        class="min-w-[350px] h-[350px] rounded-full"
+        alt=""
+        class="rounded-full md:self-start"
+        described-by="person-name"
+        width="max-w-[350px] md:min-w-[350px]"
+        height="max-h-[350px]"
       />
-      <div class="flex flex-col gap-4 text-left ml-12 pt-2">
-        <div>
+      <div class="flex flex-col gap-4 text-left md:ml-12">
+        <p>
           <span class="font-bold text-purple">Expertise: </span
-          ><span> {{ person.expertise }}</span>
-        </div>
-        <div>
+          >{{ person.expertise }}
+        </p>
+        <p>
           <span class="font-bold text-purple">Position: </span
-          ><span> {{ person.mainRole }}</span>
-        </div>
-        <div>
+          >{{ person.mainRole }}
+        </p>
+        <p>
           <span class="font-bold text-purple">Education: </span
-          ><span> {{ person.education }}</span>
-        </div>
-        <div>
+          >{{ person.education }}
+        </p>
+        <p>
           <span class="font-bold text-purple">Past Experience: </span
-          ><span> {{ person.pastExperience }}</span>
-        </div>
+          >{{ person.pastExperience }}
+        </p>
       </div>
     </div>
 

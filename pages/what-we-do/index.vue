@@ -51,7 +51,8 @@ const services = await $fetch<ShortService[]>("/api/services").then(
     <ButtonLink to="/what-we-do/services" class="mt-4">
       View all services
     </ButtonLink>
-    <h2 class="font-bold text-2xl text-purple mb-4 mt-16">Our top projects</h2>
+    <Divider />
+    <h2 class="font-bold text-2xl text-purple mb-4">Our top projects</h2>
     <ul class="flex gap-4 flex-wrap justify-around w-full">
       <li v-for="project in projects">
         <PreviewContainer
