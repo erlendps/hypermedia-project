@@ -31,7 +31,8 @@ useSeoMeta({
     <ButtonLink to="/what-we-do/services" class="mt-4">
       View all services
     </ButtonLink>
-    <h2 class="font-bold text-2xl text-purple mb-4 mt-16">Projects</h2>
+    <Divider />
+    <h2 class="font-bold text-2xl text-purple mb-4">Projects</h2>
     <p>
       Our projects focus on empowering women through education, training, and
       community-building initiatives. From job readiness programs to leadership
