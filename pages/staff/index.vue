@@ -34,7 +34,7 @@ useSeoMeta({
   <h2 class="font-bold text-xl sm:text-2xl text-purple mb-4 text-center">
     Gallery
   </h2>
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+  <div class="flex flex-wrap gap-x-4 gap-y-6 justify-around">
     <div v-for="person in staff" class="flex flex-col">
       <PreviewContainer
         :key="person.slug"
@@ -42,7 +42,7 @@ useSeoMeta({
         :to="'/staff/' + person.slug"
         :alt="`Image of ${person.firstName + ' ' + person.lastName}`"
         :name="person.firstName + ' ' + person.lastName"
-        class="min-w-[215px] h-[215px]"
+        width="w-[200px]"
       />
     </div>
   </div>
