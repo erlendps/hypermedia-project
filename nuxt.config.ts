@@ -1,9 +1,3 @@
-import { defineNuxtConfig } from 'nuxt/config';
-import dotenv from 'dotenv';
-
-// Load environment variables from .env file
-dotenv.config();
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
@@ -19,7 +13,6 @@ export default defineNuxtConfig({
   },
   // Add the publicRuntimeConfig to expose environment variables to the app
   runtimeConfig: {
-    public: {
-      openaiApiKey: process.env.OPENAI_API_KEY,
-    },  }
+    openaiApiKey: "",
+  },
 });

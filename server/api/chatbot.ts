@@ -1,5 +1,4 @@
 import OpenAI from "openai";
-import { defineEventHandler, readBody } from "h3";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -8,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { messages } = body;
 
   const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: useRuntimeConfig().openaiApiKey,
   });
 
   const filePath = path.join(process.cwd(), "assets", "initialPrompt.txt");
