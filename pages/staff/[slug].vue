@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronLeftIcon, LightBulbIcon } from '@heroicons/vue/24/outline';
+import { ChevronLeftIcon } from '@heroicons/vue/24/outline';
 
 const route = useRoute();
 const { data: dbResult } = await useFetch(`/api/staff/${route.params.slug}`);
