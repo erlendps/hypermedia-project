@@ -3,7 +3,7 @@ import {
   FireIcon,
   HeartIcon,
   MusicalNoteIcon,
-} from '@heroicons/vue/24/outline';
+} from "@heroicons/vue/24/outline";
 
 // fetch data from server
 const route = useRoute();
@@ -12,7 +12,7 @@ const { data: dbResult } = await useFetch(`/api/services/${route.params.slug}`);
 if (!dbResult.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Page Not Found',
+    statusMessage: "Page Not Found",
   });
 }
 
@@ -35,7 +35,7 @@ const service = {
   responsible: {
     name:
       dbResult.value!.Person!.firstName +
-      ' ' +
+      " " +
       dbResult.value!.Person!.lastName,
     slug: dbResult.value!.Person!.slug,
     picture: dbResult.value!.Person!.picture,
@@ -45,6 +45,20 @@ const service = {
     return { ...testimonial, icon: icons[i % 3], key: i };
   }),
 };
+
+useSeoMeta({
+  title: `${service.name} - Forties Mulier`,
+  ogTitle: `${service.name} - Forties Mulier`,
+  description: `
+  This is the page for Forties Mulier's service ${service.name}. It contains general information
+  of the service, along with practical information such as availability and duration.
+  `,
+  ogDescription: `
+  This is the page for Forties Mulier's service ${service.name}. It contains general information
+  of the service, along with practical information such as availability and duration.
+  `,
+  ogImage: service.picture,
+});
 </script>
 <template>
   <!-- the main container places all direct children vertically (flex-col), and centers them vertically -->

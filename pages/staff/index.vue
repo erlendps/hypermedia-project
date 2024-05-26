@@ -1,3 +1,16 @@
+<script setup lang="ts">
+const { data: staff } = await useFetch("/api/staff");
+
+useSeoMeta({
+  title: "Our staff - Forties Mulier",
+  ogTitle: "Our staff - Forties Mulier",
+  description:
+    "The page contains an overview of the staff that works at Forties Mulier.",
+  ogDescription:
+    "The page contains an overview of the staff that works at Forties Mulier.",
+});
+</script>
+
 <template>
   <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4 text-center">
     Our staff is here to help you
@@ -34,9 +47,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import type { ShortPerson } from '~/types/types';
-
-const staff = await $fetch<ShortPerson[]>('/api/staff');
-</script>

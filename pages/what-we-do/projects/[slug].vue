@@ -1,36 +1,46 @@
 <script setup lang="ts">
-import { ClockIcon } from '@heroicons/vue/24/outline';
-import shuffle from '@stdlib/random-shuffle';
+import { ClockIcon } from "@heroicons/vue/24/outline";
+
 const route = useRoute();
 const { data: dbResult } = await useFetch(`/api/projects/${route.params.slug}`);
 if (!dbResult.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Page Not Found',
+    statusMessage: "Page Not Found",
   });
 }
 
-const indexes = shuffle([0, 1, 2]);
+const project = {
+  name: dbResult.value!.name,
+  slug: dbResult.value!.slug,
+  picture: dbResult.value!.picture,
+  description: dbResult.value!.description,
+  timeline: dbResult.value!.timeline,
+  responsible: {
+    name:
+      dbResult.value!.Person!.firstName +
+      " " +
+      dbResult.value!.Person!.lastName,
+    slug: dbResult.value!.Person!.slug,
+    picture: dbResult.value!.Person!.picture,
+  },
+  timelineEvents: dbResult.value!.TimelineEvent.map((event, i) => {
+    return { ...event, key: i };
+  }),
+};
 
-const project = computed(() => {
-  return {
-    name: dbResult.value!.name,
-    slug: dbResult.value!.slug,
-    picture: dbResult.value!.picture,
-    description: dbResult.value!.description,
-    timeline: dbResult.value!.timeline,
-    responsible: {
-      name:
-        dbResult.value!.Person!.firstName +
-        ' ' +
-        dbResult.value!.Person!.lastName,
-      slug: dbResult.value!.Person!.slug,
-      picture: dbResult.value!.Person!.picture,
-    },
-    timelineEvents: dbResult.value!.TimelineEvent.map((event, i) => {
-      return { ...event, key: i };
-    }),
-  };
+useSeoMeta({
+  title: `${project.name} - Forties Mulier`,
+  ogTitle: `${project.name} - Forties Mulier`,
+  description: `
+  This is the page for Forties Mulier's project ${project.name}. It contains general information
+  of the project, along with a timeline of events related to the project.
+  `,
+  ogDescription: `
+  This is the page for Forties Mulier's project ${project.name}. It contains general information
+  of the project, along with a timeline of events related to the project.
+  `,
+  ogImage: project.picture,
 });
 </script>
 <template>
