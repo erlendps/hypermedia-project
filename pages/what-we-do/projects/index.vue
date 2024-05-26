@@ -1,36 +1,21 @@
 <script setup lang="ts">
-import service1 from "~/assets/images/service1.jpg";
-import service2 from "~/assets/images/service2.jpg";
-import service3 from "~/assets/images/service3.jpg";
+import type { ShortProject, ShortService } from '~/types/types';
 
 useSeoMeta({
-  title: "Our projects - Forties Mulier",
-  ogTitle: "Our projects - Forties Mulier",
-  description: "The projects Forties Mulier are currently working on.",
-  ogDescription: "The projects Forties Mulier are currently working on.",
+  title: 'Our projects - Forties Mulier',
+  ogTitle: 'Our projects - Forties Mulier',
+  description: 'The projects Forties Mulier are currently working on.',
+  ogDescription: 'The projects Forties Mulier are currently working on.',
 });
 
-// create an array of objects for the "welcome" images that should be displayed
-// after the heading.
-const welcomeImages = [
-  { src: service1, alt: "An attorney giving legal advice to a woman." },
-  { src: service2, alt: "A woman smiling while talking with a headset." },
-  { src: service3, alt: "A woman giving a speech in front of a small crowd." },
-];
-
 // get the services from the api
-const { data: projects } = await useFetch("/api/projects");
+const { data: projects } = await useFetch('/api/projects');
 </script>
 <template>
   <div class="flex flex-col items-center text-center">
     <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4">
       Our projects
     </h1>
-    <ul class="flex flex-wrap gap-4 justify-around w-full mb-4">
-      <li v-for="image in welcomeImages">
-        <SquareWithImage :src="image.src" :alt="image.alt" />
-      </li>
-    </ul>
     <p>
       At Forties Mulier, we are passionately committed to empowering women and
       fostering positive change through a range of impactful projects. Our

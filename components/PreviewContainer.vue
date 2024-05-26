@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import notFound from "~/assets/images/not_found.svg";
 /**
  * Component for a preview. The component user is required to specify the width.
  * It is meant as a preview for person, service or project

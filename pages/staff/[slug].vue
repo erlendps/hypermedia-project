@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
+import { ChevronLeftIcon } from '@heroicons/vue/24/outline';
 
 const route = useRoute();
 const { data: dbResult } = await useFetch(`/api/staff/${route.params.slug}`);
 if (!dbResult.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: "Page Not Found",
+    statusMessage: 'Page Not Found',
   });
 }
 
