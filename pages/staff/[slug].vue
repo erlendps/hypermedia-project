@@ -27,10 +27,7 @@ const person = computed(() => {
 <template>
   <div class="flex flex-col items-center text-center">
     <div class="flex items-center justify-center w-full gap-4 relative">
-      <NuxtLink
-        to="/staff"
-        class="absolute left-0 z-10 text-purple inline-flex"
-      >
+      <NuxtLink to="/staff" class="absolute left-0 text-purple inline-flex">
         <ChevronLeftIcon class="w-6 h-6" />
 
         Our staff

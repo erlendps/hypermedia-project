@@ -8,7 +8,7 @@
   </button>
   <div
     v-if="isOpen"
-    class="md:hidden fixed top-0 left-0 w-full h-full bg-purple text-white text-3xl p-4 pt-16 text-center z-40"
+    class="md:hidden fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-purple text-white text-3xl p-4 pt-16 text-center z-40"
   >
     <div class="text-4xl">
       <NuxtLink to="/">Forties Mulier</NuxtLink>

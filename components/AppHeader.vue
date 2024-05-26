@@ -1,12 +1,8 @@
 <template>
   <nav class="bg-purple text-white p-4">
     <div class="flex justify-between items-center">
-      <div class="text-3xl">
-        <NuxtLink to="/">Forties Mulier</NuxtLink>
-      </div>
-
       <PcMenu :links="links" class="hidden md:block" />
-      <MobileMenu :links="links" class="md:hidden" />
+      <MobileMenu :links="links" class="md:hidden relative z-35" />
     </div>
   </nav>
 </template>
