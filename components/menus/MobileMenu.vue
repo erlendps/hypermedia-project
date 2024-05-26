@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { Bars3Icon } from '@heroicons/vue/24/outline';
-import { ref } from 'vue';
-import { watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { Bars3Icon } from "@heroicons/vue/24/outline";
 
 const route = useRoute();
 watch(
@@ -24,11 +21,12 @@ defineProps({
   },
 });
 
-const isOpen = ref(true);
+const isOpen = ref(false);
 </script>
 
 <template>
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center h-full">
+    <NuxtLink to="/" class="text-3xl">Forties Mulier</NuxtLink>
     <button
       @click="isOpen = !isOpen"
       class="z-10 ml-auto"
@@ -38,11 +36,9 @@ const isOpen = ref(true);
     </button>
     <div
       v-if="isOpen"
-      class="fixed overscroll-contain top-0 left-0 right-0 bottom-0 w-full h-full bg-purple text-white text-3xl p-4 pt-16 text-center"
+      class="fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-purple text-white text-3xl px-4 pt-[1.375rem] text-center"
     >
-      <div class="text-4xl">
-        <NuxtLink to="/">Forties Mulier</NuxtLink>
-      </div>
+      <NuxtLink to="/" class="text-3xl">Forties Mulier</NuxtLink>
       <Divider class="mx-auto" />
       <div v-for="link in links" :key="link.path">
         <NuxtLink :to="link.path" class="block px-4 py-2">
