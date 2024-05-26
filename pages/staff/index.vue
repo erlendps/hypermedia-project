@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import groupImage from "~/assets/images/group.webp";
+
 const { data: staff } = await useFetch("/api/staff");
 
+const baseUrl = useRuntimeConfig().public.baseUrl;
 useSeoMeta({
   title: "Our staff - Forties Mulier",
   ogTitle: "Our staff - Forties Mulier",
@@ -8,6 +11,7 @@ useSeoMeta({
     "The page contains an overview of the staff that works at Forties Mulier.",
   ogDescription:
     "The page contains an overview of the staff that works at Forties Mulier.",
+  ogImage: `${baseUrl}${groupImage}`,
 });
 </script>
 
@@ -16,7 +20,7 @@ useSeoMeta({
     Our staff is here to help you
   </h1>
   <img
-    src="~/assets/images/group.webp"
+    :src="groupImage"
     class="w-full object-cover rounded-lg mb-4 border-2 border-purple"
     alt="Overview of all our current staff members."
   />
