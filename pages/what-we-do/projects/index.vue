@@ -1,26 +1,25 @@
 <script setup lang="ts">
-import type { ShortProject, ShortService } from '~/types/types';
-import service1 from '~/assets/images/service1.jpg';
-import service2 from '~/assets/images/service2.jpg';
-import service3 from '~/assets/images/service3.jpg';
+import service1 from "~/assets/images/service1.jpg";
+import service2 from "~/assets/images/service2.jpg";
+import service3 from "~/assets/images/service3.jpg";
 
 useSeoMeta({
-  title: 'Our projects',
-  ogTitle: 'Our projects',
-  description: 'The projects Forties Mulier are currently working on.',
-  ogDescription: 'The projects Forties Mulier are currently working on.',
+  title: "Our projects - Forties Mulier",
+  ogTitle: "Our projects - Forties Mulier",
+  description: "The projects Forties Mulier are currently working on.",
+  ogDescription: "The projects Forties Mulier are currently working on.",
 });
 
 // create an array of objects for the "welcome" images that should be displayed
 // after the heading.
 const welcomeImages = [
-  { src: service1, alt: 'An attorney giving legal advice to a woman.' },
-  { src: service2, alt: 'A woman smiling while talking with a headset.' },
-  { src: service3, alt: 'A woman giving a speech in front of a small crowd.' },
+  { src: service1, alt: "An attorney giving legal advice to a woman." },
+  { src: service2, alt: "A woman smiling while talking with a headset." },
+  { src: service3, alt: "A woman giving a speech in front of a small crowd." },
 ];
 
 // get the services from the api
-const projects = await $fetch<ShortProject[]>('/api/projects');
+const { data: projects } = await useFetch("/api/projects");
 </script>
 <template>
   <div class="flex flex-col items-center text-center">

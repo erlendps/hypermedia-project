@@ -1,5 +1,22 @@
 <script setup lang="ts">
-import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
+import { ChatBubbleLeftRightIcon, MapIcon } from "@heroicons/vue/24/outline";
+import serviceImage from "~/assets/images/service2.jpg";
+
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+useSeoMeta({
+  title: "Contact us - Forties Mulier",
+  ogTitle: "Contact us - Forties Mulier",
+  description: `
+    This is the contact page for Forties Mulier. The page contains information on
+    how to contact Forties Mulier by phone, email or visiting our facilities.
+    `,
+  ogDescription: `
+    This is the contact page for Forties Mulier. The page contains information on
+    how to contact Forties Mulier by phone, email or visiting our facilities.
+    `,
+  ogImage: baseUrl + serviceImage,
+});
 </script>
 
 <template>
@@ -24,7 +41,7 @@ import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
         well-being are our top priorities.
       </p>
       <img
-        src="/assets/images/service2.jpg"
+        :src="serviceImage"
         alt="A black and white photo of the center from the 1940s"
         class="h-64"
       />
@@ -41,7 +58,7 @@ import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
         <p class="w-72">Sat-Sun 11:00 - 18:00</p>
       </div>
       <img
-        src="/assets/images/map.png"
+        src="~/assets/images/map.png"
         alt="A map showing the location of the center"
         class="h-64 border-2 border-purple rounded-lg"
       />

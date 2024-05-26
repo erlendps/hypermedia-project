@@ -1,3 +1,23 @@
+<script setup lang="ts">
+import oldCenter from "~/assets/images/old.webp";
+
+const baseUrl = useRuntimeConfig().public.baseUrl;
+
+useSeoMeta({
+  title: "About us - Forties Mulier",
+  ogTitle: "About us - Forties Mulier",
+  description: `
+    This is the about page of Forties Mulier. The page contains
+    information on our mission, the center in general and our history.
+    `,
+  ogDescription: `
+    This is the about page of Forties Mulier. The page contains
+    information on our mission, the center in general and our history.
+    `,
+  ogImage: baseUrl + oldCenter,
+});
+</script>
+
 <template>
   <div class="flex-col items-center text-center">
     <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4">Our mission</h1>
@@ -33,7 +53,7 @@
         unwavering commitment to making a difference.
       </p>
       <img
-        src="/assets/images/old.webp"
+        :src="oldCenter"
         alt="A black and white photo of the center from the 1940s"
         class="h-64"
       />
