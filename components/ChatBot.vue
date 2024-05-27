@@ -1,48 +1,4 @@
-<template>
-  <!-- Chatbot Chat box -->
-  <div class="chatbot_window" v-if="isOpen">
-    <!-- Chat header -->
-    <div class="chatHeader">
-      <h2>Chatbot</h2>
-      <img @click="toggleChatbot" src="~/assets/img/close_chat.png" alt="Close">
-    </div>
-    <!-- Messages container -->
-    <div class="messages" ref="messagesContainer">
-      <!-- Render each message -->
-      <div v-for="message in messages" :key="message.id" :class="['message', message.role]">
-        <!-- Assistant message -->
-        <div v-if="message.role === 'assistant'" id="assistant_row">
-          <img src="~/assets/img/robot_icon.png">
-          <p>{{ message.content }}</p>
-        </div>
-        <!-- Typing indicator -->
-        <div v-else-if="message.role === 'typing'" id="typing_row">
-          <img src="~/assets/img/robot_icon.png">
-          <p>{{ message.content }}</p>
-        </div>
-        <!-- User message -->
-        <div v-else id="user_row">
-          <img src="~/assets/img/user_icon.png">
-          <p>{{ message.content }}</p>
-        </div>
-      </div>
-    </div>
-    <!-- Input area -->
-    <div class="input_row">
-      <textarea id="textInput" v-model="input" @keydown.enter.prevent="sendMessage"
-        placeholder="Type a message..."></textarea>
-      <img @click="sendMessage" src="~/assets/img/send_msg.png">
-    </div>
-  </div>
-
-  <!-- Toggle to open/close chatbot -->
-  <button class="chatbot_closed" v-else @click="toggleChatbot"><img src="~/assets/img/chat_closed.png"
-      alt="Toggle Chatbot" /></button>
-</template>
-
 <script setup lang="ts">
-import { ref, nextTick } from 'vue';
-
 let firstOpen = true;
 
 // Variable to control the chatbot visibility
@@ -54,8 +10,9 @@ const toggleChatbot = () => {
     // Initial message when chatbot is opened for the first time
     const firstMessage = {
       id: Date.now(),
-      role: 'assistant',
-      content: "Hey! I'm Emily, here to assist you in any way I can. Need help navigating the website or just someone to talk to? Feel free to ask!",
+      role: "assistant",
+      content:
+        "Hey! I'm Emily, here to assist you in any way I can. Need help navigating the website or just someone to talk to? Feel free to ask!",
     };
     messages.value.push(firstMessage);
     firstOpen = false;
@@ -67,11 +24,11 @@ const toggleChatbot = () => {
 // Array to store chat messages
 const messages = ref<{ id: number; role: string; content: string }[]>([]);
 
-const input = ref('');
+const input = ref("");
 
 // Function to scroll messages container to the bottom
 const scrollToBottom = () => {
-  const messagesContainer = document.querySelector('.messages');
+  const messagesContainer = document.querySelector(".messages");
   if (messagesContainer) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
@@ -83,11 +40,11 @@ const sendMessage = async () => {
 
   const userMessage = {
     id: Date.now(),
-    role: 'user',
+    role: "user",
     content: input.value,
   };
 
-  input.value = '';
+  input.value = "";
 
   messages.value.push(userMessage);
 
@@ -98,8 +55,8 @@ const sendMessage = async () => {
     // Add typing indicator
     const botMessage = {
       id: Date.now() + 1,
-      role: 'typing',
-      content: '...',
+      role: "typing",
+      content: "...",
     };
 
     messages.value.push(botMessage);
@@ -109,16 +66,18 @@ const sendMessage = async () => {
     scrollToBottom();
 
     // Send messages to the server and receive response
-    const response = await fetch('/api/chatbot', {
-      method: 'POST',
+    const response = await fetch("/api/chatbot", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ messages: messages.value.slice(0, -1) }), // Exclude the typing indicator from the request
     });
 
     // Find the index of the typing indicator message
-    const currentMessageIndex = messages.value.findIndex(message => message.content === '...');
+    const currentMessageIndex = messages.value.findIndex(
+      (message) => message.content === "..."
+    );
     const data = await response.json();
 
     // Handle API response
@@ -126,13 +85,14 @@ const sendMessage = async () => {
       if (currentMessageIndex !== -1) {
         // Update the typing indicator to the assistant message
         messages.value[currentMessageIndex].role = "assistant";
-        messages.value[currentMessageIndex].content = data.choices[0].message.content;
+        messages.value[currentMessageIndex].content =
+          data.choices[0].message.content;
       }
     } else {
-      console.error('Unexpected API response:', data);
+      console.error("Unexpected API response:", data);
     }
   } catch (error) {
-    console.error('Error sending message:', error);
+    console.error("Error sending message:", error);
   }
 
   // Scroll to bottom after rendering assistant message or handling error
@@ -140,6 +100,61 @@ const sendMessage = async () => {
   scrollToBottom();
 };
 </script>
+
+<template>
+  <!-- Chatbot Chat box -->
+  <div class="chatbot_window" v-if="isOpen">
+    <!-- Chat header -->
+    <div class="chatHeader">
+      <h2>Chatbot</h2>
+      <img
+        @click="toggleChatbot"
+        src="~/assets/img/close_chat.png"
+        alt="Close"
+      />
+    </div>
+    <!-- Messages container -->
+    <div class="messages" ref="messagesContainer">
+      <!-- Render each message -->
+      <div
+        v-for="message in messages"
+        :key="message.id"
+        :class="['message', message.role]"
+      >
+        <!-- Assistant message -->
+        <div v-if="message.role === 'assistant'" id="assistant_row">
+          <img src="~/assets/img/robot_icon.png" />
+          <p>{{ message.content }}</p>
+        </div>
+        <!-- Typing indicator -->
+        <div v-else-if="message.role === 'typing'" id="typing_row">
+          <img src="~/assets/img/robot_icon.png" />
+          <p>{{ message.content }}</p>
+        </div>
+        <!-- User message -->
+        <div v-else id="user_row">
+          <img src="~/assets/img/user_icon.png" />
+          <p>{{ message.content }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Input area -->
+    <div class="input_row">
+      <textarea
+        id="textInput"
+        v-model="input"
+        @keydown.enter.prevent="sendMessage"
+        placeholder="Type a message..."
+      ></textarea>
+      <img @click="sendMessage" src="~/assets/img/send_msg.png" />
+    </div>
+  </div>
+
+  <!-- Toggle to open/close chatbot -->
+  <button class="chatbot_closed" v-else @click="toggleChatbot">
+    <img src="~/assets/img/chat_closed.png" alt="Toggle Chatbot" />
+  </button>
+</template>
 
 <style scoped>
 .chatbot_closed {
@@ -167,7 +182,7 @@ const sendMessage = async () => {
   height: 450px;
   background-color: rgb(255, 255, 255);
   border-width: 4px;
-  border-color: #584ABC;
+  border-color: #584abc;
   border-radius: 25px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: 1000;
@@ -182,7 +197,7 @@ const sendMessage = async () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #584ABC;
+  background-color: #584abc;
 }
 
 .chatHeader h2 {
@@ -261,11 +276,11 @@ const sendMessage = async () => {
 }
 
 .message.assistant p {
-  background-color: #F3A5BC;
+  background-color: #f3a5bc;
 }
 
 .message.typing p {
-  background-color: #F3A5BC;
+  background-color: #f3a5bc;
   color: rgb(77, 77, 77);
   width: 25px;
 }
@@ -276,7 +291,7 @@ const sendMessage = async () => {
 
 .message.user p {
   text-align: left;
-  background-color: #584ABC;
+  background-color: #584abc;
   color: white;
 }
 
