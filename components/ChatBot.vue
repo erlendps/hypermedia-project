@@ -4,37 +4,32 @@ import {
   ChatBubbleOvalLeftEllipsisIcon as ChatIcon,
   PaperAirplaneIcon,
 } from "@heroicons/vue/24/outline";
-
-let firstOpen = true;
+import type { ChatCompletion } from "openai/src/resources/chat/index.js";
+import type { Message } from "~/types/types";
 
 // Variable to control the chatbot visibility
 const isOpen = ref(false);
 
 // Toggle chatbot visibility
 const toggleChatbot = () => {
-  if (firstOpen) {
-    // Initial message when chatbot is opened for the first time
-    const firstMessage = {
-      id: Date.now(),
-      role: "assistant",
-      content:
-        "Hey! I'm Emily, here to assist you in any way I can. Need help navigating the website or just someone to talk to? Feel free to ask!",
-    };
-    messages.value.push(firstMessage);
-    firstOpen = false;
-  }
-
   isOpen.value = !isOpen.value;
 };
 
 // Array to store chat messages
-const messages = ref<{ id: number; role: string; content: string }[]>([]);
+const messages = ref<Message[]>([]);
+// add first welcome message
+messages.value.push({
+  id: Date.now(),
+  role: "assistant",
+  content:
+    "Hey! I'm Emily, here to assist you in any way I can. Need help navigating the website or just someone to talk to? Feel free to ask!",
+});
 
 const input = ref("");
 
 // Function to scroll messages container to the bottom
 const scrollToBottom = () => {
-  const messagesContainer = document.querySelector(".messages");
+  const messagesContainer = document.querySelector("#messages-list");
   if (messagesContainer) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
@@ -72,7 +67,7 @@ const sendMessage = async () => {
     scrollToBottom();
 
     // Send messages to the server and receive response
-    const response = await fetch("/api/chatbot", {
+    const data: ChatCompletion = await $fetch("/api/chatbot", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,15 +79,14 @@ const sendMessage = async () => {
     const currentMessageIndex = messages.value.findIndex(
       (message) => message.content === "..."
     );
-    const data = await response.json();
 
     // Handle API response
     if (data.choices && data.choices.length > 0) {
       if (currentMessageIndex !== -1) {
         // Update the typing indicator to the assistant message
         messages.value[currentMessageIndex].role = "assistant";
-        messages.value[currentMessageIndex].content =
-          data.choices[0].message.content;
+        messages.value[currentMessageIndex].content = data.choices[0].message
+          .content as string;
       }
     } else {
       console.error("Unexpected API response:", data);
@@ -117,7 +111,9 @@ const sendMessage = async () => {
       class="w-full h-full bg-purple border-4 border-purple rounded-3xl shadow-[0_4px_8px_0_rgba(0,0,0,0.6)] flex flex-col"
     >
       <!-- Chat header -->
-      <div class="w-full flex items-center justify-between p-2">
+      <div
+        class="w-full flex items-center justify-between p-2 border-b-2 border-white-dark"
+      >
         <h2 class="text-2xl text-white">Chatbot</h2>
         <button type="button" @click="toggleChatbot">
           <XMarkIcon class="text-white h-10 w-10 hover:text-white-200" />
@@ -127,6 +123,7 @@ const sendMessage = async () => {
       <!-- Messages container -->
       <ul
         class="bg-white grow overflow-scroll flex flex-col gap-2 py-4"
+        id="messages-list"
         ref="messagesContainer"
       >
         <!-- Render each message -->

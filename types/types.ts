@@ -30,11 +30,17 @@ type TimelineEvent = {
   timelineEventId: string;
 };
 
+type Message = {
+  id: number;
+  role: string;
+  content: string;
+};
+
 export type {
   ShortService,
-  Service,
   ShortProject,
   MenuLinks,
+  Message,
   ShortPerson,
   TimelineEvent,
 };
