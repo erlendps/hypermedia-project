@@ -1,9 +1,20 @@
 <script setup lang="ts">
-import type { MenuLinks } from "~/types/types";
+import type { MenuLinks } from '~/types/types';
 
-defineProps<{
+const props = defineProps<{
   links: MenuLinks;
 }>();
+const route = useRoute();
+watch(
+  () => route.fullPath,
+  () => {
+    props.links.forEach((link) => {
+      if (link.showSubmenu) {
+        link.showSubmenu = false;
+      }
+    });
+  }
+);
 </script>
 
 <template>
@@ -15,18 +26,30 @@ defineProps<{
     >
       <li v-for="link in links" class="text-left w-32">
         <div class="relative group">
+          <!-- event not navigation if submenu exists-->
           <NuxtLink
+            class="cursor-pointer"
+            :to="
+              // If the link has a submenu and the current route includes the link's path
+              // (if we are on a subpage of the link), set the link to the current route (so it stays active, but not clickable),
+              // otherwise set it to the link's path
+              link.submenu
+                ? route.fullPath.includes(link.path)
+                  ? route.fullPath
+                  : ''
+                : link.path
+            "
             :active-class="'underline underline-offset-8 decoration-2'"
-            :to="link.path"
+            @mousedown="link.showSubmenu = !link.showSubmenu"
           >
             {{ link.name }}
           </NuxtLink>
           <ul
-            v-if="link.submenu"
-            class="left-0 pt-2 w-40 bg-purple text-white shadow-lg rounded-b-lg absolute border-t-4 hidden group-hover:block"
+            v-if="link.submenu && link.showSubmenu"
+            class="left-0 pt-2 w-40 bg-purple text-white shadow-lg rounded-b-lg absolute border-t-4"
           >
             <li
-              v-for="sublink in link.submenu"
+              v-for="sublink in [link].concat(link.submenu)"
               :key="sublink.path"
               class="block px-4 py-2 hover:bg-purple-dark"
             >
