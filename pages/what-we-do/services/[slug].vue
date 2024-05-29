@@ -134,7 +134,7 @@ useSeoMeta({
       <li
         v-for="testimonial in service.testimonials"
         :key="testimonial.key"
-        class="w-full text-lg group"
+        class="w-full text-lg group relative"
       >
         <!--
           Depending on whether the list element is an odd or even child, we align the text
