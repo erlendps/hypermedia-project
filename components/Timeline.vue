@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
-import { type TimelineEvent } from '~/types/types';
+import { defineProps } from "vue";
+import { type TimelineEvent } from "~/types/types";
 
 const props = defineProps<{
   events: TimelineEvent[];
@@ -10,10 +10,6 @@ const props = defineProps<{
 <template>
   <!-- Horizontal timeline with dates on the x-axis -->
   <div class="flex flex-col items-center">
-    <div class="flex space-x-4 items-center">
-      <div class="w-1/2 h-1 bg-purple"></div>
-      <div class="w-1/2 h-1 bg-purple"></div>
-    </div>
     <div class="flex flex-col md:flex-row space-x-4 items-center">
       <!-- Timeline events -->
       <div
@@ -23,7 +19,7 @@ const props = defineProps<{
       >
         <div class="flex flex-col items-center gap-2">
           <span>{{ event.date }}</span>
-          <div class="h-1 bg-purple w-full" />
+          <hr class="border border-purple w-full rounded-lg" />
           <span class="h-16 mb-4">{{ event.eventInfo }}</span>
         </div>
       </div>

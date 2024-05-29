@@ -40,7 +40,10 @@ useSeoMeta({
       every woman who walks through our doors.
     </p>
 
-    <ButtonLink to="/staff"> Meet our fantastic people </ButtonLink>
+    <div class="flex justify-center items-center gap-4">
+      <HeartWithPeopleIcon class="text-purple h-14 w-14" />
+      <ButtonLink to="/staff">Meet our fantastic people!</ButtonLink>
+    </div>
     <Divider class="mx-auto" />
     <h2 class="font-bold text-xl sm:text-2xl text-purple mb-4">Our history</h2>
     <div class="flex flex-col lg:flex-row gap-16 items-center">
@@ -55,7 +58,7 @@ useSeoMeta({
       <img
         :src="oldCenter"
         alt="A black and white photo of the center from the 1940s"
-        class="h-64"
+        class="h-64 border-2 border-purple rounded-xl"
       />
     </div>
   </div>

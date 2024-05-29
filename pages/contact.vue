@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
-import serviceImage from '~/assets/images/service2.jpg';
+import { ChatBubbleLeftRightIcon, MapIcon } from "@heroicons/vue/24/outline";
+import serviceImage from "~/assets/images/service2.jpg";
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
 useSeoMeta({
-  title: 'Contact us - Forties Mulier',
-  ogTitle: 'Contact us - Forties Mulier',
+  title: "Contact us - Forties Mulier",
+  ogTitle: "Contact us - Forties Mulier",
   description: `
     This is the contact page for Forties Mulier. The page contains information on
     how to contact Forties Mulier by phone, email or visiting our facilities.
@@ -26,7 +26,7 @@ useSeoMeta({
       <div>
         <h1 class="text-4xl sm:text-5xl text-purple mb-4">Call us now</h1>
         <h1 class="font-bold text-4xl sm:text-5xl text-purple mb-4">
-          +39 000 000
+          <a href="tel:+39000000">+39 000 000</a>
         </h1>
       </div>
     </div>
@@ -72,11 +72,21 @@ useSeoMeta({
         <h2 class="font-bold text-md sm:text-lg text-purple">
           General inquires
         </h2>
-        <p class="w-72 text-lg">help@fortiesmulier.org</p>
+        <a
+          class="w-72 text-lg"
+          href="mailto:help@fortiesmulier.org"
+          target="_blank"
+          >help@fortiesmulier.org</a
+        >
       </div>
       <div>
         <h2 class="font-bold text-md sm:text-lg text-purple">Press contact</h2>
-        <p class="w-72 text-lg">press@fortiesmulier.org</p>
+        <a
+          class="w-72 text-lg"
+          href="mailto:press@fortiesmulier.org"
+          target="_blank"
+          >press@fortiesmulier.org</a
+        >
       </div>
     </div>
   </div>

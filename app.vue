@@ -3,9 +3,9 @@
     <header class="w-100 bg-purple p-4 sticky top-0 z-40">
       <AppHeader />
     </header>
-    <main>
+    <main class="grow flex flex-col">
       <div
-        class="mx-auto px-4 py-6 sm:px-8 md:px-16 lg:px-32 w-full max-w-[1156px]"
+        class="mx-auto px-4 py-6 sm:px-8 md:px-16 lg:px-32 w-full max-w-[1156px] grow"
       >
         <NuxtPage />
       </div>

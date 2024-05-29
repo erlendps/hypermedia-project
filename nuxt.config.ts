@@ -22,6 +22,12 @@ export default defineNuxtConfig({
       unstyled: true,
     },
   },
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
   app: {
     head: {
       title: "Forties Mulier",

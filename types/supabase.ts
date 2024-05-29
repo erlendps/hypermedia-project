@@ -12,7 +12,8 @@ export type Database = {
       Person: {
         Row: {
           education: string
-          expertise: string[]
+          email: string | null
+          expertise: string
           firstName: string
           lastName: string
           mainRole: string
@@ -23,7 +24,8 @@ export type Database = {
         }
         Insert: {
           education?: string
-          expertise?: string[]
+          email?: string | null
+          expertise: string
           firstName?: string
           lastName?: string
           mainRole?: string
@@ -34,7 +36,8 @@ export type Database = {
         }
         Update: {
           education?: string
-          expertise?: string[]
+          email?: string | null
+          expertise?: string
           firstName?: string
           lastName?: string
           mainRole?: string
