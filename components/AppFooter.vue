@@ -8,11 +8,13 @@ import { AtSymbolIcon, PhoneIcon, HomeIcon } from "@heroicons/vue/24/outline";
   >
     <div class="flex md:w-1/3 gap-2 items-center justify-center max-w-xs">
       <AtSymbolIcon class="color-white h-8 w-8" />
-      <p>help@fortiesmulier.org</p>
+      <a href="mailto:help@fortiesmulier.org" target="_blank"
+        >help@fortiesmulier.org</a
+      >
     </div>
     <div class="flex md:w-1/3 gap-2 items-center max-w-xs justify-center">
       <PhoneIcon class="color-white h-8 w-8" />
-      <p>+39 000 000</p>
+      <a href="tel:+39000000">+39 000 000</a>
     </div>
     <div class="flex md:w-1/3 gap-2 items-center max-w-xs">
       <HomeIcon class="color-white h-8 w-8" />
