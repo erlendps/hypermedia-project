@@ -19,6 +19,7 @@ type ShortPerson = {
 type MenuLinks = Array<{
   path: string;
   name: string;
+  menuName?: string;
   submenu?: Array<{ path: string; name: string }>;
   showSubmenu?: boolean;
 }>;
