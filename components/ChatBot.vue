@@ -22,7 +22,7 @@ messages.value.push({
   id: Date.now(),
   role: "assistant",
   content:
-    "Hey! I'm Emily, here to assist you in any way I can. Need help navigating the website or just someone to talk to? Feel free to ask!",
+    "Hello! How can I assist you today? Whether you need information about our services or just someone to talk to, I'm here for you. 🌸",
 });
 
 const input = ref("");
