@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ChevronLeftIcon } from '@heroicons/vue/24/outline';
+import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
 
 const route = useRoute();
 const { data: dbResult } = await useFetch(`/api/staff/${route.params.slug}`);
 if (!dbResult.value) {
   throw createError({
     statusCode: 404,
-    statusMessage: 'Page Not Found',
+    statusMessage: "Page Not Found",
   });
 }
 
@@ -39,18 +39,12 @@ useSeoMeta({
 </script>
 <template>
   <div class="flex flex-col items-center text-center">
-    <div class="flex items-center justify-center w-full gap-4 mb-6 relative">
-      <NuxtLink
-        to="/staff"
-        class="absolute left-0 text-purple hover:text-purple-900 inline-flex"
-      >
-        <ChevronLeftIcon class="w-6 h-6 stroke-2" />
-        <p class="hidden sm:block">Our staff</p>
-      </NuxtLink>
-      <h1 id="person-name" class="font-bold text-3xl sm:text-4xl text-purple">
-        {{ person.name }}
-      </h1>
-    </div>
+    <h1
+      id="person-name"
+      class="font-bold mb-6 text-3xl sm:text-4xl text-purple"
+    >
+      {{ person.name }}
+    </h1>
     <div class="flex flex-col md:flex-row gap-8 w-full items-center">
       <SquareWithImage
         :src="person.picture"

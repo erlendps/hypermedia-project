@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Bars3Icon } from "@heroicons/vue/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 
 const route = useRoute();
 watch(
@@ -22,6 +22,10 @@ defineProps({
 });
 
 const isOpen = ref(false);
+
+const isActive = (path: string) => {
+  return route.fullPath.includes(path);
+};
 </script>
 
 <template>
@@ -29,10 +33,12 @@ const isOpen = ref(false);
     <NuxtLink to="/" class="text-3xl">Forties Mulier</NuxtLink>
     <button
       @click="isOpen = !isOpen"
-      class="z-10 ml-auto"
-      aria-label="Open the menu"
+      class="z-10 ml-auto hover:text-white-dark"
     >
-      <Bars3Icon class="w-8 h-8" />
+      <XMarkIcon v-if="isOpen" class="w-8 h-8" />
+      <Bars3Icon v-else class="w-8 h-8" />
+      <p v-if="isOpen" class="sr-only">Close Menu</p>
+      <p v-else class="sr-only">Open the menu</p>
     </button>
     <div
       v-if="isOpen"
@@ -41,7 +47,15 @@ const isOpen = ref(false);
       <NuxtLink to="/" class="text-3xl">Forties Mulier</NuxtLink>
       <Divider class="mx-auto" />
       <div v-for="link in links" :key="link.path">
-        <NuxtLink :to="link.path" class="block px-4 py-2">
+        <NuxtLink
+          :to="link.path"
+          class="block px-4 py-2"
+          :class="
+            isActive(link.path)
+              ? 'underline underline-offset-8 decoration-2'
+              : ''
+          "
+        >
           {{ link.name }}
         </NuxtLink>
         <div v-if="link.submenu" class="pl-4">
@@ -50,6 +64,11 @@ const isOpen = ref(false);
             :key="sublink.path"
             :to="sublink.path"
             class="block px-4 py-2 text-2xl"
+            :class="
+              isActive(sublink.path)
+                ? 'underline underline-offset-8 decoration-2'
+                : ''
+            "
           >
             {{ sublink.name }}
           </NuxtLink>

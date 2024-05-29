@@ -16,6 +16,10 @@ watch(
     });
   }
 );
+
+const isActive = (path: string) => {
+  return route.fullPath.includes(path);
+};
 </script>
 
 <template>
@@ -35,7 +39,7 @@ watch(
             @click="() => (link.showSubmenu = !link.showSubmenu)"
             class="hover:text-white-dark flex items-center gap-2"
             :class="
-              route.fullPath.includes(link.path)
+              isActive(link.path)
                 ? 'underline underline-offset-8 decoration-2'
                 : ''
             "
@@ -49,34 +53,32 @@ watch(
           <Transition>
             <ul
               v-if="link.submenu && link.showSubmenu"
-              class="left-0 pt-2 w-40 bg-purple text-white shadow-lg rounded-b-lg absolute border-t-4"
+              class="left-0 pt-2 w-40 bg-purple text-white shadow-lg rounded-b-lg absolute border-t-4 border-x-2 border-b-2 border-pink"
             >
-              <li
+              <NuxtLink
                 v-for="sublink in [link].concat(link.submenu)"
                 :key="sublink.path"
-                class="block px-4 py-2 hover:bg-purple-dark"
+                :to="sublink.path"
+                class="group"
               >
-                <NuxtLink :to="sublink.path">
+                <li
+                  class="block px-4 py-2 hover:bg-purple-900 group-last:rounded-b-lg"
+                >
                   {{ sublink.name }}
-                </NuxtLink>
-              </li>
+                </li>
+              </NuxtLink>
             </ul>
           </Transition>
         </div>
         <NuxtLink
           v-else
           class="cursor-pointer hover:text-white-dark"
-          :to="
-            // If the link has a submenu and the current route includes the link's path
-            // (if we are on a subpage of the link), set the link to the current route (so it stays active, but not clickable),
-            // otherwise set it to the link's path
-            link.submenu
-              ? route.fullPath.includes(link.path)
-                ? route.fullPath
-                : ''
-              : link.path
+          :to="link.path"
+          :class="
+            isActive(link.path)
+              ? 'underline underline-offset-8 decoration-2'
+              : ''
           "
-          :active-class="'underline underline-offset-8 decoration-2'"
           @mousedown="link.showSubmenu = !link.showSubmenu"
         >
           {{ link.name }}
