@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import PcMenu from "~/components/menus/PcMenu.vue";
-import MobileMenu from "~/components/menus/MobileMenu.vue";
-
 const links = ref([
   {
     path: "/what-we-do",
