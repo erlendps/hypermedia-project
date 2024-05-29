@@ -12,6 +12,7 @@ if (!dbResult.value) {
 
 const person = {
   name: `${dbResult.value!.firstName} ${dbResult.value!.lastName}`,
+  email: dbResult.value!.email,
   picture: dbResult.value!.picture,
   mainRole: dbResult.value!.mainRole,
   education: dbResult.value!.education,
@@ -55,6 +56,12 @@ useSeoMeta({
         height="max-h-[350px]"
       />
       <div class="flex flex-col gap-4 text-left md:ml-12">
+        <p>
+          <span class="font-bold text-purple">Email: </span>
+          <a :href="`mailto:${person.email}`" target="_blank">
+            {{ person.email }}
+          </a>
+        </p>
         <p>
           <span class="font-bold text-purple">Expertise: </span
           >{{ person.expertise }}
