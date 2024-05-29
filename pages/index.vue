@@ -14,6 +14,11 @@ useSeoMeta({
     <h1 class="font-bold text-3xl sm:text-4xl text-purple mb-4">
       Welcome to Forties Mulier
     </h1>
+    <img
+      alt="Hello word"
+      src="~/assets/images/frontpage.webp"
+      class="w-full border-2 border-purple rounded-lg mb-4"
+    />
     <p>
       Forties Mulier is a non-profit organization dedicated to supporting women
       in need. Our mission is to provide comprehensive resources, guidance, and
