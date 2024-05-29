@@ -58,7 +58,7 @@ useSeoMeta({
       <img
         :src="oldCenter"
         alt="A black and white photo of the center from the 1940s"
-        class="h-64"
+        class="h-64 border-2 border-purple rounded-xl"
       />
     </div>
   </div>
