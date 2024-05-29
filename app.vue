@@ -9,10 +9,24 @@
       >
         <NuxtPage />
       </div>
-      <ChatBot />
+      <Transition>
+        <ChatBot />
+      </Transition>
     </main>
     <footer class="w-100 bg-purple p-4 mt-auto">
       <AppFooter />
     </footer>
   </div>
 </template>
+
+<style>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
