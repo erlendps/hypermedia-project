@@ -186,7 +186,7 @@ const sendMessage = async () => {
   <!-- Toggle to open/close chatbot -->
   <button
     v-else
-    class="sticky block ml-auto w-max bottom-16 mb-2 mt-[-4.75rem] bg-purple p-2 rounded-full border-pink border-2 hover:bg-purple-900 mr-4 lg:mr-20 shadow-[0_4px_8px_0_rgba(0,0,0,0.6)"
+    class="sticky block ml-auto w-max bottom-4 md:bottom-16 mb-2 mt-[-4.75rem] bg-purple p-2 rounded-full border-pink border-2 hover:bg-purple-900 mr-4 lg:mr-20 shadow-[0_4px_8px_0_rgba(0,0,0,0.6)"
     @click="toggleChatbot"
   >
     <ChatIcon class="w-12 h-12 text-white" />
