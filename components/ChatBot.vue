@@ -169,10 +169,14 @@ const sendMessage = async () => {
           class="py-2 px-4 border border-white-200 rounded-l-full w-full overflow-y-scroll resize-none bg-white-200"
           placeholder="Type a message..."
         ></textarea>
-        <button class="h-full bg-white-dark rounded-r-full">
+        <button
+          class="h-full bg-white-dark rounded-r-full"
+          @click.prevent="sendMessage"
+        >
           <PaperAirplaneIcon
             class="text-purple w-11 pr-2 hover:text-purple-900"
           />
+          <!-- add "label" for screen reader -->
           <p class="sr-only">Send message</p>
         </button>
       </div>
