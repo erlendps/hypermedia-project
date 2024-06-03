@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import oldCenter from "~/assets/images/old.webp";
+import oldCenter from '~/assets/images/old.webp';
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
+// SEO meta tags for the about page
 useSeoMeta({
-  title: "About us - Forties Mulier",
-  ogTitle: "About us - Forties Mulier",
+  title: 'About us - Forties Mulier',
+  ogTitle: 'About us - Forties Mulier',
   description: `
     This is the about page of Forties Mulier. The page contains
     information on our mission, the center in general and our history.
