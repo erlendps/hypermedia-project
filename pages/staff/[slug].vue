@@ -108,7 +108,7 @@ useSeoMeta({
         <PreviewContainer
           v-for="service in person.services"
           :key="service.name"
-          :to="'/what-we-do/projects/' + service.slug"
+          :to="'/what-we-do/services/' + service.slug"
           :src="service.picture"
           :alt="'Image for ' + service.name"
           :name="service.name"
