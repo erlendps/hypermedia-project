@@ -36,7 +36,7 @@ const props = defineProps({
 });
 
 const ariaDescribedBy = computed(() => {
-  return `preview-${props.name.replace(/\s/g, "-").toLowerCase()}`;
+  return `preview-${props.name.replace(/\s/g, '-').toLowerCase()}`;
 });
 </script>
 

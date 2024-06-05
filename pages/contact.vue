@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { ChatBubbleLeftRightIcon, MapIcon } from "@heroicons/vue/24/outline";
-import serviceImage from "~/assets/images/service2.jpg";
+import { ChatBubbleLeftRightIcon, MapIcon } from '@heroicons/vue/24/outline';
+import serviceImage from '~/assets/images/service2.jpg';
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
 
+// SEO meta tags for the contact page
 useSeoMeta({
-  title: "Contact us - Forties Mulier",
-  ogTitle: "Contact us - Forties Mulier",
+  title: 'Contact us - Forties Mulier',
+  ogTitle: 'Contact us - Forties Mulier',
   description: `
     This is the contact page for Forties Mulier. The page contains information on
     how to contact Forties Mulier by phone, email or visiting our facilities.

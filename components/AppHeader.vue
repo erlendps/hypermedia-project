@@ -1,29 +1,34 @@
 <script setup lang="ts">
 const links = ref([
   {
-    path: "/what-we-do",
-    name: "What we do",
-    menuName: "Activities",
+    path: '/what-we-do',
+    name: 'What we do',
+    menuName: 'Activities',
     submenu: [
-      { path: "/what-we-do/services", name: "Services" },
-      { path: "/what-we-do/projects", name: "Projects" },
+      { path: '/what-we-do/services', name: 'Services' },
+      { path: '/what-we-do/projects', name: 'Projects' },
     ],
     showSubmenu: false,
   },
-  { path: "/contact", name: "Contact us" },
-  { path: "/about", name: "About us" },
-  { path: "/staff", name: "Our staff" },
+  { path: '/contact', name: 'Contact us' },
+  { path: '/about', name: 'About us' },
+  { path: '/staff', name: 'Our staff' },
 ]);
 
+/**
+ * Function to check if the click event is outside the submenu
+ * This is used to close the submenu when the user clicks outside of it
+ * @param event - The event object
+ */
 const checkClick = (event: Event) => {
   if (!links.value[0].showSubmenu) return;
 
   const target = event.target as HTMLElement;
-  if (target.classList.contains("submenu")) return;
+  if (target.classList.contains('submenu')) return;
   let parent = target.parentElement;
   let containsClass = false;
   while (parent !== null) {
-    if (parent.classList.contains("submenu")) {
+    if (parent.classList.contains('submenu')) {
       containsClass = true;
       break;
     }
@@ -33,12 +38,12 @@ const checkClick = (event: Event) => {
     links.value[0].showSubmenu = false;
   }
 };
-// add event listener on window for mousedown events to close submenu if the click is outside
+// Add event listener on window for mousedown events to close submenu if the click is outside
 onBeforeMount(() => {
-  document.addEventListener("mousedown", checkClick);
+  document.addEventListener('mousedown', checkClick);
 });
 onBeforeUnmount(() => {
-  document.removeEventListener("mousedown", checkClick);
+  document.removeEventListener('mousedown', checkClick);
 });
 </script>
 
