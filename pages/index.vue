@@ -1,11 +1,12 @@
 <script setup lang="ts">
+// SEO meta tags for the homepage
 useSeoMeta({
-  title: "Home - Forties Mulier",
-  ogTitle: "Home - Forties Mulier",
+  title: 'Home - Forties Mulier',
+  ogTitle: 'Home - Forties Mulier',
   description:
-    "This is the homepage of Forties Mulier, a non-profit organization helping women that have experience domestic violence or mistreatment.",
+    'This is the homepage of Forties Mulier, a non-profit organization helping women that have experience domestic violence or mistreatment.',
   ogDescription:
-    "This is the homepage of Forties Mulier, a non-profit organization helping women that have experience domestic violence or mistreatment.",
+    'This is the homepage of Forties Mulier, a non-profit organization helping women that have experience domestic violence or mistreatment.',
 });
 </script>
 

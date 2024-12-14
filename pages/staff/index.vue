@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import groupImage from "~/assets/images/group.webp";
+import groupImage from '~/assets/images/group.webp';
 
-const { data: staff } = await useFetch("/api/staff");
+const { data: staff } = await useFetch('/api/staff');
 
 const baseUrl = useRuntimeConfig().public.baseUrl;
+
+// Set SEO meta tags for the staff page
 useSeoMeta({
-  title: "Our staff - Forties Mulier",
-  ogTitle: "Our staff - Forties Mulier",
+  title: 'Our staff - Forties Mulier',
+  ogTitle: 'Our staff - Forties Mulier',
   description:
-    "The page contains an overview of the staff that works at Forties Mulier.",
+    'The page contains an overview of the staff that works at Forties Mulier.',
   ogDescription:
-    "The page contains an overview of the staff that works at Forties Mulier.",
+    'The page contains an overview of the staff that works at Forties Mulier.',
   ogImage: `${baseUrl}${groupImage}`,
 });
 </script>
